@@ -33,6 +33,9 @@
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css"
+        rel="stylesheet" />
+
 </head>
 
 <body class="animsition">
@@ -60,7 +63,7 @@
                             <a href="index.html">
                                 <i class="fas fa-table"></i>Dashboard</a>
                         </li>
-                       
+
 
                         <li>
                             <a href="table.html">
@@ -70,8 +73,8 @@
                             <a href="form.html">
                                 <i class="far fa-check-square"></i>Forms</a>
                         </li>
-                    
-                        
+
+
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>
@@ -136,17 +139,17 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                     <h2 class="pb-2 display-5">HotelX</h2>
+                    <h2 class="pb-2 display-5">HotelX</h2>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            
+
                             <a class="js-arrow" href="index.html">
                                 <i class="fas fa-tachometer-alt"></i>Capability 1</a>
-                           
+
                         </li>
                         <li>
                             <a href="room_list.html">
@@ -168,8 +171,8 @@
                             <a href="form.html">
                                 <i class="far fa-check-square"></i>Forms</a>
                         </li>
-                     
-                 
+
+
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>
@@ -238,7 +241,8 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <input class="au-input au-input--xl" type="text" name="search"
+                                    placeholder="Search for datas &amp; reports..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -414,127 +418,73 @@
                             <div class="col-md-12">
                                 <div class="overview-wrap">
                                     <h2 class="title-1">Daily Report</h2>
-                                   
+
                                 </div>
                             </div>
-                        </div>                        
-                        <form class="form-header" action="" method="POST">
-                            
-                                
-                            <div class="container">
-                                <div class="row">
-                                   <div class='col-sm-6'>
-                                      <div class="form-group">
-                                         <div class='input-group date' id='datetimepicker1'>
-                                            <input type='text' class="form-control" />
-                                            <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                         </div>
-                                      </div>
-                                   </div>
-                                   <script type="text/javascript">
-                                      $(function () {
-                                          $('#datetimepicker1').datetimepicker();
-                                      });
-                                   </script>
-                                </div>
-                             </div>
-                            
-                            <button class="au-btn--submit" type="submit">
-                                <i class="zmdi zmdi-search"></i>
-                            </button>
-                        </form>
-
-                        <div class="row m-t-25">
-                            <div class="col-md-6 img">
-                                <div class="card-body bg-primary">
-                                    <div class = "row">
-                                        <div class = "col-6">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q"  alt="" class="img-rounded">
-                                        </div>
-                                        <div class = "col-6 text-light">
-                                        <blockquote>
-                                            <h4 class="text-light">Fiona Gallagher</h4>
-                                            <small><cite title="Source Title">123 Abcd St, Chicago, USA  <i class="icon-map-marker"></i></cite></small>
-                                        </blockquote>
-                                        <p>
-                                            Phone: (714) 124-4567 <br>
-                                            Room: 201 <br>
-                                            Check In: 10/22/2020 <br>
-                                            Check Out: 12/22/2020
-                                        </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>       
-                            <div class="col-md-6 img">
-                                <div class="card-body bg-primary">
-                                    <div class = "row">
-                                        <div class = "col-6">
-                                        <img src="https://e0.365dm.com/20/10/768x432/skysports-cristiano-ronaldo_5138440.jpg"  alt="" class="img-rounded">
-                                        </div>
-                                        <div class = "col-6 text-light">
-                                        <blockquote>
-                                            <h4 class="text-light">Cristiano Ronaldo</h4>
-                                            <small><cite title="Source Title">1234 Funchal, Madeira, Portugal  <i class="icon-map-marker"></i></cite></small>
-                                        </blockquote>
-                                        <p>
-                                            Phone: (714) 124-4567 <br>
-                                            Room: 401 <br>
-                                            Check In: 10/22/2020 <br>
-                                            Check Out: 12/22/2020
-                                        </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                       
                         </div>
+                        <div class="row m-t-5">
+                            <form class="form-header" action="" method="POST">
 
-                        <div class="row m-t-25">
-                            <div class="col-md-6 img">
-                                <div class="card-body bg-primary">
-                                    <div class = "row">
-                                        <div class = "col-6">
-                                        <img src="https://4.bp.blogspot.com/-1vhlxwtUwC0/WV_W1p-6JSI/AAAAAAAAF3g/AKWMR9qy0H8rdHZE0LZqsSZRGmaJlvQRgCEwYBhgL/s1600/lionel-messi-2017-3.jpg"  alt="" class="img-rounded">
-                                        </div>
-                                        <div class = "col-6 text-light">
-                                        <blockquote>
-                                            <h4 class="text-light">Lionel Messi</h4>
-                                            <small><cite title="Source Title">123 Abcd St, Chicago, USA  <i class="icon-map-marker"></i></cite></small>
-                                        </blockquote>
-                                        <p>
-                                            Phone: (714) 124-4567 <br>
-                                            Room: 207 <br>
-                                            Check In: 10/22/2020 <br>
-                                            Check Out: 12/22/2020
-                                        </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>       
-                            <div class="col-md-6 img">
-                                <div class="card-body bg-primary">
-                                    <div class = "row">
-                                        <div class = "col-6">
-                                        <img src="https://1.bp.blogspot.com/-WJlUeu-QGp0/X1dGiAwRiwI/AAAAAAAAY8Q/64e5BNDELt0kELXeEFXdXr4vhh4C0CAGgCLcBGAsYHQ/w500-h281/1599506307_085988_noticia_normal.jpg"  alt="" class="img-rounded">
-                                        </div>
-                                        <div class = "col-6 text-light">
-                                        <blockquote>
-                                            <h4 class="text-light">Kylian Mbappé</h4>
-                                            <small><cite title="Source Title">123 Abcd St, Chicago, USA  <i class="icon-map-marker"></i></cite></small>
-                                        </blockquote>
-                                        <p>
-                                            Phone: (714) 123-4567 <br>
-                                            Room: 303 <br>
-                                            Check In: 10/22/2020 <br>
-                                            Check Out: 12/22/2020
-                                        </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                       
+
+                                <input class="au-input" data-date-format="mm/dd/yyyy" id="datepicker">
+
+                                <button class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+                            </form>
                         </div>
+                        <div class="row m-t-25">
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Room Number</th>
+                                        <th>Guest Name</th>
+                                        <th>Date In</th>
+                                        <th>Date Out</th>
+                                        <th>Amount Paid</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>201</td>
+                                        <td>Fiona Gallagher</td>
+                                        <td>10/22/2020</td>
+                                        <td>12/22/2020</td>
+                                        <td>$200</td>
+                                    </tr>
+                                    <tr>
+                                        <td>303</td>
+                                        <td>Kylian Mbappe</td>
+                                        <td>10/22/2020</td>
+                                        <td>12/22/2020</td>
+                                        <td>$300</td>
+                                    </tr>
+                                    <tr>
+                                        <td>401</td>
+                                        <td>Cristiano Ronaldo</td>
+                                        <td>10/22/2020</td>
+                                        <td>12/22/2020</td>
+                                        <td>$400</td>
+                                    </tr>
+                                    <tr>
+                                        <td>207</td>
+                                        <td>Lionel Messi</td>
+                                        <td>10/22/2020</td>
+                                        <td>12/22/2020</td>
+                                        <td>$200</td>
+                                    </tr>
+                                    <tr class='thead-light'>
+                                        <th>Total Paid</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>$1100</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- abc1 -->
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="copyright">
@@ -574,8 +524,32 @@
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
-    <script src="js/moment.js"></script>
-    <script src="js/bootstrap-datetimepicker.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <style type="text/css">
+        .datepicker td,
+        .datepicker th {
+            width: 2em;
+            height: 2em;
+        }
+
+        .table .thead-dark th {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
+    <script type="text/javascript">
+        $('#datepicker').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $('#datepicker').datepicker("setDate", new Date());
+    </script>
 </body>
 
 </html>
