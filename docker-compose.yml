@@ -1,0 +1,48 @@
+version: '3'
+ 
+services:
+ 
+    php:
+        build:
+            context: ./docker/php
+        ports:
+            - 8989:9000
+        volumes:
+            - ./codephp:/srv/www/api
+            - ./docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+            - ./config/custom-php.ini:/usr/local/etc/php/php.ini
+        environment:
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+ 
+    nginx:
+        image: nginx
+        ports:
+            - 80:80
+        volumes:
+            - ./codephp:/srv/www/api
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - php
+ 
+    mysql:
+        image: mysql
+        ports:
+            - 3306:3306
+        depends_on:
+            - php
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+            - mysql:db
+        ports:
+            - "8082:80"
+        environment:
+            - PMA_USER=root
+            - PMA_PASSWORD=root
+            - PHP_UPLOAD_MAX_FILESIZE=100MB
