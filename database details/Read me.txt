@@ -1,0 +1,28 @@
+Notes:
+Check info of rows in all "Status" tables first.
+Record Status: 0: Reserved, 1: Checked In, 2: Checkout
+Housekeeping Equip Status: 0: UnChecked (Not Cleaned), 1: Checked (Cleaned), 2: Checked (Bad, Replacing)
+Completed in Invoice table: 0 - Not Completed, 1: Completed
+Website_Reservation in Booking table: 0 - False, 1 - True
+
+(Room_Number, Date) is unique key in Record table
+Record Status <> Room Status 
+ - Room Status is available, but Record Status is not available
+ - Record Status is available, but Room Status is not available
+Record Status: 
+ - Available: (no record on the current day || 
+	(Record Status = Reserved && guest ID in record = guest ID customer ))
+
+Guest book a room:
+- Add Guest table
+- Check Record to make sure the room is no record in these days
+- Add Booking table
+- Add Record table
+Guest check in:
+- Add guest to Booking + Record table if guest didn't book it before
+- Check to make sure room is available (Record Status + Room Status)
+- Add Invoice table + Invoice Rooms table
+- Update Room table + Housekeeping table 
+Guest check out:
+- Update Room table (Room Status ID)
+- Update Invoice table
