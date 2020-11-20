@@ -148,7 +148,13 @@ foreach ($roomlist as $row) {
     }
     ?>
         <div class="card <?php echo $cssColor;?>">
-            <a href="https://linktocapability6">
+        <?php
+        $roomNumber="";
+  if($row['Room_Status_ID'] == 3 || $row['Room_Status_ID'] == 2){
+    $roomNumber = $row['Room_Number'];
+  }
+        ?>
+            <a href="#" data-target="#largeModals<?php echo $roomNumber; ?>" data-toggle="modal">
                 <div class="card-body">
                     <h4 class="card-title mb-5 text-light">Room: <?php echo $row['Room_Number'];?>
                         <small>
@@ -172,14 +178,42 @@ foreach ($roomlist as $row) {
 
 <?php
     }
-?>
-
-<?php
-$temp++;
+    $temp++;
+    
   }
 ?>
-                       
-                            <div class="col-md-12">
+     
+<?php
+foreach ($roomlist as $row) {
+    if($row['Room_Status_ID'] == 3 || $row['Room_Status_ID'] == 2){
+
+?>
+     <div class="modal fade" id="largeModals<?php echo $row['Room_Number']; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="largeModalLabel">System warning</h5>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body">
+<p>
+Room <?php echo $row['Room_Number']; ?> is <?php echo $row['Room_Status_Info']; ?>, Do you want to turn the status to Available?
+</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+<button type="button" class="btn btn-primary">Yes</button>
+</div>
+</div>
+</div>
+</div>  
+<?php
+    }
+}
+?>
+    <div class="col-md-12">
                                 <div class="copyright">
                                     <p>Copyright © 2020.</p>
                                 </div>
