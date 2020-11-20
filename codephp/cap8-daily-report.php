@@ -43,55 +43,9 @@
    
 
         <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
-            <div class="logo">
-                <a href="#">
-                     <h2 class="pb-2 display-5">HotelX</h2>
-                </a>
-            </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
-                        <li>
-                            
-                            <a class="js-arrow" href="index.html">
-                                <i class="fas fa-list"></i>Capability 1</a>       
-                           
-                        </li>
-                        <li>
-                            <a href="room_list.html">
-                                <i class="fas fa-list"></i>Capability 2</a>
-                        </li>
-                        
-                        <li>
-                            <a href="reservation.html">
-                                <i class="fas fa-list"></i>Capability 3</a>
-                        </li>
-
-                        <li>
-                            <a href="house_keeping.html">
-                                <i class="fas fa-list"></i>Capability 4</a>
-                        </li>
-                        <li>
-                            <a href="guest_information.html">
-                                <i class="fas fa-list"></i>Capability 5</a>
-                        </li>
-                        <li>
-                            <a href="current_stay.html">
-                                <i class="fas fa-list"></i>Capability 6</a>
-                        </li> 
-                        <li>
-                            <a href="cap7-search-guests.html">
-                                <i class="fas fa-list"></i>Capability 7</a>
-                        </li>
-                        <li class="active">
-                            <a href="cap8-daily-report.html">
-                                <i class="fas fa-list"></i>Capability 8</a>
-                        </li>       
-                    </ul>
-                </nav>
-            </div>
-        </aside>
+        <?php
+include "menu.php";
+?>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
@@ -209,29 +163,9 @@
 
     </div>
 
-    <!-- Jquery JS-->
-    <script src="vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
-    <script src="vendor/wow/wow.min.js"></script>
-    <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
-
-    <!-- Main JS-->
-    <script src="js/main.js"></script>
+    <?php
+include "footer.php";
+?>
 
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <script
