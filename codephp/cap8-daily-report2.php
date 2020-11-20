@@ -1,13 +1,3 @@
-<?php 
-    
-    $pickedDate = date("m/d/Y");
-    if(isset($_POST['submit'])){
-        if (!empty($_POST['datepicker'])){
-            $pickedDate = $_POST['datepicker'];        
-        }
-    }
-
- ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,9 +22,6 @@ include "menu.php";
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-        <?php
-
-?>
             <!-- HEADER DESKTOP-->
             <header class="header-desktop">
                 <div class="section__content section__content--p30">
@@ -61,12 +48,12 @@ include "menu.php";
                             </div>
                         </div>
                         <div class="row m-t-5">
-                            <form class="form-header" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                            <form class="form-header" action="" method="POST">
 
 
-                                <input class="au-input" data-date-format="mm/dd/yyyy" id="datepicker" name="datepicker">
+                                <input class="au-input" data-date-format="mm/dd/yyyy" id="datepicker">
 
-                                <button class="au-btn--submit" type="submit" name="submit">
+                                <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
@@ -75,7 +62,7 @@ include "menu.php";
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th><div class="text-center"><h2><?php echo htmlspecialchars($pickedDate); ?></h2></div></th>                                       
+                                        <th><div class="text-center"><h2>10/22/2020</h2></div></th>                                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,41 +79,40 @@ include "menu.php";
                                     </tr>
                                 </thead>
                                 <tbody>
-<?php
-// debug($pickedDate);
-$pickedDateSQL = date("Y-m-d", strtotime($pickedDate));
-// debug($pickedDateSQL);
-$roomlist = DB::query("SELECT Room.Room_Number AS Room_Number, Fname, Lname, Date_Checked_in, Date_Checkout, Room_Rate AS Amound_Paid, Record_Status_Code
-FROM Record
-INNER JOIN Invoice
-ON BookingID = Booking_ID
-INNER JOIN Guest
-ON Invoice.Guest_ID = Guest.Guest_ID
-INNER JOIN Room
-ON Record.Room_Number = Room.Room_Number
-INNER JOIN Price
-ON Room.Room_Type = Price.Room_Type
-WHERE Record.Date = '".$pickedDateSQL."' AND Record.Record_Status_Code != 0");
-$totalPaid = 0;
-foreach ($roomlist as $row):
-    $totalPaid += $row['Amound_Paid'];
-?>
-   
-                                
                                     <tr>
-                                        <td><?php echo htmlspecialchars($row['Room_Number']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['Date_Checked_in']); ?></td>
-                                        <td><?php echo $row['Record_Status_Code'] == 1  ? 'Not Yet' : htmlspecialchars($row['Date_Checkout']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['Amound_Paid']); ?></td>
+                                        <td>201</td>
+                                        <td>Fiona Gallagher</td>
+                                        <td>10/22/2020</td>
+                                        <td>10/23/2020</td>
+                                        <td>$200</td>
                                     </tr>
-<?php endforeach; ?>                                                                        
+                                    <tr>
+                                        <td>303</td>
+                                        <td>Kylian Mbappe</td>
+                                        <td>10/22/2020</td>
+                                        <td>10/24/2020</td>
+                                        <td>$600</td>
+                                    </tr>
+                                    <tr>
+                                        <td>401</td>
+                                        <td>Cristiano Ronaldo</td>
+                                        <td>10/22/2020</td>
+                                        <td>10/25/2020</td>
+                                        <td>$1200</td>
+                                    </tr>
+                                    <tr>
+                                        <td>207</td>
+                                        <td>Lionel Messi</td>
+                                        <td>10/22/2020</td>
+                                        <td>Not Yet</td>
+                                        <td>$12000</td>
+                                    </tr>
                                     <tr class='thead-light'>
                                         <th>Total Paid</th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
-                                        <th><?php echo $totalPaid; ?></th>
+                                        <th>$14000</th>
                                     </tr>
                                 </tbody>
                             </table>
@@ -169,7 +155,7 @@ include "footer.php";
             autoclose: true,
             todayHighlight: true,
         });
-        $('#datepicker').datepicker("setDate", "<?php echo $pickedDate; ?>");
+        $('#datepicker').datepicker("setDate", new Date());
         // $('#datepicker').datepicker("setDate", "10/22/2020");
     </script>
 </body>

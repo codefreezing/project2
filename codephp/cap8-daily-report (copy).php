@@ -1,11 +1,11 @@
 <?php 
     
     $pickedDate = date("m/d/Y");
-    if(isset($_POST['submit'])){
-        if (!empty($_POST['datepicker'])){
-            $pickedDate = $_POST['datepicker'];        
-        }
-    }
+    // if(isset($_POST['submit'])){
+    //     if (!empty($_POST['datepicker'])){
+    //         $pickedDate = $_POST['datepicker'];        
+    //     }
+    // }
 
  ?>
 <!DOCTYPE html>
@@ -93,9 +93,6 @@ include "menu.php";
                                 </thead>
                                 <tbody>
 <?php
-// debug($pickedDate);
-$pickedDateSQL = date("Y-m-d", strtotime($pickedDate));
-// debug($pickedDateSQL);
 $roomlist = DB::query("SELECT Room.Room_Number AS Room_Number, Fname, Lname, Date_Checked_in, Date_Checkout, Room_Rate AS Amound_Paid, Record_Status_Code
 FROM Record
 INNER JOIN Invoice
@@ -106,7 +103,7 @@ INNER JOIN Room
 ON Record.Room_Number = Room.Room_Number
 INNER JOIN Price
 ON Room.Room_Type = Price.Room_Type
-WHERE Record.Date = '".$pickedDateSQL."' AND Record.Record_Status_Code != 0");
+WHERE Record.Date = $pickedDate AND Record.Record_Status_Code != 0");
 $totalPaid = 0;
 foreach ($roomlist as $row):
     $totalPaid += $row['Amound_Paid'];
@@ -117,7 +114,7 @@ foreach ($roomlist as $row):
                                         <td><?php echo htmlspecialchars($row['Room_Number']); ?></td>
                                         <td><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></td>
                                         <td><?php echo htmlspecialchars($row['Date_Checked_in']); ?></td>
-                                        <td><?php echo $row['Record_Status_Code'] == 1  ? 'Not Yet' : htmlspecialchars($row['Date_Checkout']); ?></td>
+                                        <td><?php echo $row['Record_Status_Code'] == 2  ? 'Not Yet' : htmlspecialchars($row['Date_Checkout']); ?></td>
                                         <td><?php echo htmlspecialchars($row['Amound_Paid']); ?></td>
                                     </tr>
 <?php endforeach; ?>                                                                        
