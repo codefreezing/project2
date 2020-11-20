@@ -8,39 +8,66 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
+                        <?php
+$cap1 = "";
+$cap2 = "";
+$cap3 = "";
+$cap4 = "";
+$cap5 = "";
+$cap6 = "";
+$cap7 = "";
+$cap8 = "";
+if($_SERVER['REQUEST_URI'] == "/index.php"){
+    $cap1 = "active";
+}else if($_SERVER['REQUEST_URI'] == "/room_list.php"){
+    $cap2 = "active";
+}else if($_SERVER['REQUEST_URI'] == "/reservation.php"){
+    $cap3 = "active";
+}else if($_SERVER['REQUEST_URI'] == "/house_keeping.php"){
+    $cap4 = "active";
+}else if($_SERVER['REQUEST_URI'] == "/guest_information.php"){
+    $cap5 = "active";
+}else if($_SERVER['REQUEST_URI'] == "/current_stay.php"){
+    $cap6 = "active";
+}else if($_SERVER['REQUEST_URI'] == "/cap7-search-guests.php"){
+    $cap7 = "active";
+}else if($_SERVER['REQUEST_URI'] == "/cap8-daily-report.php"){
+    $cap8 = "active";
+}
+                        ?>
+                        <li class="<?php echo $cap1; ?>">
                             
                             <a class="js-arrow" href="index.php">
                                 <i class="fas fa-list"></i>Capability 1</a>       
                            
                         </li>
-                        <li>
+                        <li class="<?php echo $cap2; ?>">
                             <a href="room_list.php">
                                 <i class="fas fa-list"></i>Capability 2</a>
                         </li>
                         
-                        <li>
+                        <li class="<?php echo $cap3; ?>">
                             <a href="reservation.php">
                                 <i class="fas fa-list"></i>Capability 3</a>
                         </li>
 
-                        <li>
+                        <li class="<?php echo $cap4; ?>">
                             <a href="house_keeping.php">
                                 <i class="fas fa-list"></i>Capability 4</a>
                         </li>
-                        <li>
+                        <li class="<?php echo $cap5; ?>">
                             <a href="guest_information.php">
                                 <i class="fas fa-list"></i>Capability 5</a>
                         </li>
-                        <li>
+                        <li class="<?php echo $cap6; ?>">
                             <a href="current_stay.php">
                                 <i class="fas fa-list"></i>Capability 6</a>
                         </li> 
-                        <li>
+                        <li class="<?php echo $cap7; ?>">
                             <a href="cap7-search-guests.php">
                                 <i class="fas fa-list"></i>Capability 7</a>
                         </li>
-                        <li>
+                        <li class="<?php echo $cap8; ?>">
                             <a href="cap8-daily-report.php">
                                 <i class="fas fa-list"></i>Capability 8</a>
                         </li>       
