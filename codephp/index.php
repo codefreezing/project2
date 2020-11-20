@@ -3,6 +3,7 @@
 
 <head>
 <?php
+include "db.class.php";
 include "debug.php";
 include "head.php";
 ?>
@@ -21,7 +22,6 @@ include "menu.php";
         <div class="page-container">
 
         <?php
-include "db.class.php";
 $numberAvailable = DB::query("SELECT count(*) as numberAvailable FROM Room, Price, Room_Status where Room_Status.Room_Status_ID = 0 
 and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.Room_Type");
 

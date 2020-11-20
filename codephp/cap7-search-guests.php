@@ -4,6 +4,8 @@
 <head>
 
 <?php
+include "db.class.php";
+include "debug.php";
 include "head.php";
 ?>
 
