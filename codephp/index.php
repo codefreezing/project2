@@ -147,16 +147,17 @@ foreach ($roomlist as $row) {
     }
     ?>
         <div class="card <?php echo $cssColor;?>">
-            
-            <div class="card-body">
-                <h4 class="card-title mb-5 text-light">Room: <?php echo $row['Room_Number'];?>
-                    <small>
-                        <span class="badge badge-success float-right"><?php echo $row['Room_Info'];?></span>
-                    </small>
-                </h4>
-                <h5 class="card-text text-light float-right"><?php echo $row['Room_Status_Info'];?>
-                </h5>
-            </div>
+            <a href="https://linktocapability6">
+                <div class="card-body">
+                    <h4 class="card-title mb-5 text-light">Room: <?php echo $row['Room_Number'];?>
+                        <small>
+                            <span class="badge badge-success float-right"><?php echo $row['Room_Info'];?></span>
+                        </small>
+                    </h4>
+                    <h5 class="card-text text-light float-right"><?php echo $row['Room_Status_Info'];?>
+                    </h5>
+                </div>
+                </a>  
         </div>
     </div>
 
