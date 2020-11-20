@@ -2,6 +2,11 @@
 <html lang="en">
 
 <head>
+<style>
+.btntext{
+    color: white !important;
+}
+</style>
 <?php
 include "db.class.php";
 include "debug.php";
@@ -60,134 +65,160 @@ include "menu.php";
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                    $roomList = DB::query("SELECT * FROM Room");
+                                    foreach ($roomList as $row) {
+                                    ?>
                                     <tr>
-                                        <td>100398</td>
+                                        <td><?php echo $row['Room_Number']; ?></td>
                                         <td>
                                             <div class="card">
                                                 <div class="card-header">
                                                     <strong>The guest is staying in the room for each day for the next 7 days</strong>                                        
                                                 </div>
                                                 <div class="card-body">
-                                                    <button type="button" class="btn btn-primary" disabled="">
+                                                    <a class="btn btn-primary btntext">
                                                     
-                                                            <p class="text-left">Date: 10-28-2020</p>
-                                                            <p class="text-left font-weight-bold">Emily Pham</p>
-                                                                                                                                                       
-                                                    </button>
-                                                    <button type="button" class="btn btn-secondary" disabled="">
-                                                        <p class="text-left">Date: 10-29-2020</p>
-                                                        <p class="text-left font-weight-bold">&nbsp;</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-success" disabled="">
-                                                        <p class="text-left">Date: 10-30-2020</p>
-                                                        <p class="text-left font-weight-bold">Kiet Dang</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger" disabled="">
-                                                        <p class="text-left">Date: 11-01-2020</p>
-                                                        <p class="text-left font-weight-bold">Kiet Dang</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning" disabled="">
-                                                        <p class="text-left">Date: 11-02-2020</p>
-                                                        <p class="text-left font-weight-bold">&nbsp;</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-info" disabled="">
-                                                        <p class="text-left">Date: 11-03-2020</p>
-                                                        <p class="text-left ">&nbsp;</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-light" disabled="">
-                                                        <p class="text-left">Date: 11-04-2020</p>
-                                                        <p class="text-left ">Phuong Nguyen</p>
-                                                    </button>
+                                                            <p class="text-left">Date: <?php echo date("Y-m-d");?></p>
+                                                            <?php
+                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),'2020-11-22');
+                                                               if(isset($getresultfromnow[0]['Guest_ID'])){
+                                                                 $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
+                                                            ?>
+                                                                <p class="text-left font-weight-bold"><?php 
+                                                                echo $getresultguestname[0]['Fname']; 
+                                                                echo " ";
+                                                                echo $getresultguestname[0]['Lname'];?></p>
+                                                            <?php
+                                                               }else{
+                                                            ?>
+                                                             <p class="text-left font-weight-bold">&nbsp;</p>
+                                                            <?php
+                                                               }
+                                                            ?>                                                                                                     
+                                                    </a>
+                                                    <a class="btn btn-secondary btntext"">
+                                                        <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+1 day'));?></p>
+                                                        <?php
+                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+1 day')));
+                                                               if(isset($getresultfromnow[0]['Guest_ID'])){
+                                                                 $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
+                                                            ?>
+                                                                <p class="text-left font-weight-bold"><?php 
+                                                                echo $getresultguestname[0]['Fname']; 
+                                                                echo " ";
+                                                                echo $getresultguestname[0]['Lname'];?></p>
+                                                            <?php
+                                                               }else{
+                                                            ?>
+                                                             <p class="text-left font-weight-bold">&nbsp;</p>
+                                                            <?php
+                                                               }
+                                                            ?>
+                                                    </a>
+                                                    <a class="btn btn-success btntext"">
+                                                        <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+2 day'));?></p>
+                                                        <?php
+                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+2 day')));
+                                                               if(isset($getresultfromnow[0]['Guest_ID'])){
+                                                                 $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
+                                                            ?>
+                                                                <p class="text-left font-weight-bold"><?php 
+                                                                echo $getresultguestname[0]['Fname']; 
+                                                                echo " ";
+                                                                echo $getresultguestname[0]['Lname'];?></p>
+                                                            <?php
+                                                               }else{
+                                                            ?>
+                                                             <p class="text-left font-weight-bold">&nbsp;</p>
+                                                            <?php
+                                                               }
+                                                            ?>
+                                                    </a>
+                                                    <a class="btn btn-danger btntext"">
+                                                        <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+3 day'));?></p>
+                                                        <?php
+                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+3 day')));
+                                                               if(isset($getresultfromnow[0]['Guest_ID'])){
+                                                                 $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
+                                                            ?>
+                                                                <p class="text-left font-weight-bold"><?php 
+                                                                echo $getresultguestname[0]['Fname']; 
+                                                                echo " ";
+                                                                echo $getresultguestname[0]['Lname'];?></p>
+                                                            <?php
+                                                               }else{
+                                                            ?>
+                                                             <p class="text-left font-weight-bold">&nbsp;</p>
+                                                            <?php
+                                                               }
+                                                            ?>
+                                                    </a>
+                                                    <a class="btn btn-warning btntext"">
+                                                        <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+4 day'));?></p>
+                                                        <?php
+                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+4 day')));
+                                                               if(isset($getresultfromnow[0]['Guest_ID'])){
+                                                                 $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
+                                                            ?>
+                                                                <p class="text-left font-weight-bold"><?php 
+                                                                echo $getresultguestname[0]['Fname']; 
+                                                                echo " ";
+                                                                echo $getresultguestname[0]['Lname'];?></p>
+                                                            <?php
+                                                               }else{
+                                                            ?>
+                                                             <p class="text-left font-weight-bold">&nbsp;</p>
+                                                            <?php
+                                                               }
+                                                            ?>
+                                                    </a>
+                                                    <a class="btn btn-info btntext"">
+                                                        <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+5 day'));?></p>
+                                                        <?php
+                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+5 day')));
+                                                               if(isset($getresultfromnow[0]['Guest_ID'])){
+                                                                 $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
+                                                            ?>
+                                                                <p class="text-left font-weight-bold"><?php 
+                                                                echo $getresultguestname[0]['Fname']; 
+                                                                echo " ";
+                                                                echo $getresultguestname[0]['Lname'];?></p>
+                                                            <?php
+                                                               }else{
+                                                            ?>
+                                                             <p class="text-left font-weight-bold">&nbsp;</p>
+                                                            <?php
+                                                               }
+                                                            ?>
+                                                    </a>
+                                                    <a class="btn btn-dark btntext"">
+                                                        <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+6 day'));?></p>
+                                                        <?php
+                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+6 day')));
+                                                               if(isset($getresultfromnow[0]['Guest_ID'])){
+                                                                 $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
+                                                            ?>
+                                                                <p class="text-left font-weight-bold"><?php 
+                                                                echo $getresultguestname[0]['Fname']; 
+                                                                echo " ";
+                                                                echo $getresultguestname[0]['Lname'];?></p>
+                                                            <?php
+                                                               }else{
+                                                            ?>
+                                                             <p class="text-left font-weight-bold">&nbsp;</p>
+                                                            <?php
+                                                               }
+                                                            ?>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>                                         
                                     </tr>
-                                   
-                                    <tr>
-                                        <td>10098</td>
-                                        <td>
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <strong>The guest is staying in the room for each day for the next 7 days</strong>                                        
-                                                </div>
-                                                <div class="card-body">
-                                                    <button type="button" class="btn btn-primary" disabled="">
-                                                    
-                                                            <p class="text-left">Date: 10-28-2020</p>
-                                                            <p class="text-left font-weight-bold">Emily Pham</p>
-                                                                                                                                                       
-                                                    </button>
-                                                    <button type="button" class="btn btn-secondary" disabled="">
-                                                        <p class="text-left">Date: 10-29-2020</p>
-                                                        <p class="text-left font-weight-bold">&nbsp;</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-success" disabled="">
-                                                        <p class="text-left">Date: 10-30-2020</p>
-                                                        <p class="text-left font-weight-bold">Kiet Dang</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger" disabled="">
-                                                        <p class="text-left">Date: 11-01-2020</p>
-                                                        <p class="text-left font-weight-bold">Kiet Dang</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning" disabled="">
-                                                        <p class="text-left">Date: 11-02-2020</p>
-                                                        <p class="text-left font-weight-bold">&nbsp;</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-info" disabled="">
-                                                        <p class="text-left">Date: 11-03-2020</p>
-                                                        <p class="text-left ">&nbsp;</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-light" disabled="">
-                                                        <p class="text-left">Date: 11-04-2020</p>
-                                                        <p class="text-left ">Phuong Nguyen</p>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>                                         
-                                    </tr>
-
-                                    <tr>
-                                        <td>10098</td>
-                                        <td>
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <strong>The guest is staying in the room for each day for the next 7 days</strong>                                        
-                                                </div>
-                                                <div class="card-body">
-                                                    <button type="button" class="btn btn-primary" disabled="">
-                                                    
-                                                            <p class="text-left">Date: 10-28-2020</p>
-                                                            <p class="text-left font-weight-bold">Emily Pham</p>
-                                                                                                                                                       
-                                                    </button>
-                                                    <button type="button" class="btn btn-secondary" disabled="">
-                                                        <p class="text-left">Date: 10-29-2020</p>
-                                                        <p class="text-left font-weight-bold">&nbsp;</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-success" disabled="">
-                                                        <p class="text-left">Date: 10-30-2020</p>
-                                                        <p class="text-left font-weight-bold">Kiet Dang</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger" disabled="">
-                                                        <p class="text-left">Date: 11-01-2020</p>
-                                                        <p class="text-left font-weight-bold">Kiet Dang</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-warning" disabled="">
-                                                        <p class="text-left">Date: 11-02-2020</p>
-                                                        <p class="text-left font-weight-bold">&nbsp;</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-info" disabled="">
-                                                        <p class="text-left">Date: 11-03-2020</p>
-                                                        <p class="text-left ">&nbsp;</p>
-                                                    </button>
-                                                    <button type="button" class="btn btn-light" disabled="">
-                                                        <p class="text-left">Date: 11-04-2020</p>
-                                                        <p class="text-left ">Phuong Nguyen</p>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>                                         
-                                    </tr>
+                                   <?php
+                                    }
+                                   ?>
+                                 
 
                                    
                                 </tbody>
@@ -217,7 +248,7 @@ include "footer.php";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-    <style type="text/css">
+    <styl type="text/css">
         .datepicker td,
         .datepicker th {
             width: 2em;
@@ -229,7 +260,7 @@ include "footer.php";
             background-color: #007bff;
             border-color: #007bff;
         }
-    </style>
+    </styl>
     <script type="text/javascript">
         $('#datepicker').datepicker({
             weekStart: 1,
