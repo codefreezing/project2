@@ -23,6 +23,12 @@ include "menu.php";
         <div class="page-container">
 
         <?php
+if(isset($_GET['update'])){
+    $roomIdNumber = $_GET['update'];
+    DB::update('Room', ['Room_Status_ID' => 0], "Room_Number=%s", $roomIdNumber);
+}
+
+
 $numberAvailable = DB::query("SELECT count(*) as numberAvailable FROM Room, Price, Room_Status where Room_Status.Room_Status_ID = 0 
 and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.Room_Type");
 
@@ -203,8 +209,8 @@ Room <?php echo $row['Room_Number']; ?> is <?php echo $row['Room_Status_Info']; 
 </p>
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-<button type="button" class="btn btn-primary">Yes</button>
+<a href="#" class="btn btn-secondary" data-dismiss="modal">No</a>
+<a href="index.php?update=<?php echo $row['Room_Number']; ?>" class="btn btn-primary">Yes</a>
 </div>
 </div>
 </div>
