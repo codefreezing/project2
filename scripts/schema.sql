@@ -17,7 +17,7 @@ CREATE TABLE Guest
   Photo VARCHAR(300) NOT NULL,
   Lname VARCHAR(30) NOT NULL,
   Fname VARCHAR(30) NOT NULL,
-  Phone_Number INT NOT NULL,
+  Phone_Number VARCHAR(15) NOT NULL,
   Address VARCHAR(300) NOT NULL,
   Email VARCHAR(100) NOT NULL,
   ID_Info VARCHAR(30) NOT NULL,
@@ -195,16 +195,16 @@ INSERT INTO `Housekeeping` (`Room_Number`, `Bathroom`, `Towels`, `Bed_Sheets`, `
 ('505', '1', '1', '1', '1', '1', '1');
 
 INSERT INTO `Guest` (`Guest_ID`, `Photo`, `Lname`, `Fname`, `Phone_Number`, `Address`, `Email`, `ID_Info`, `Vehicle`, `License_Plate`) VALUES 
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/623/633879_original.jpg', 'Suker', 'Davor ', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/968/560/56594393_original.jpg', 'Kluivert', 'Patrick', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/627/56716733_original.jpg', 'Conti', 'Bruno', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/968/554/hector-pedro-scarone_original.jpg', 'Scarone', 'Hector', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/664/682652_original.jpg', 'Batistuta', 'Gabriel', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/634/1032056_original.jpg', 'Taffarel', 'Claudio', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/639/1110911_original.jpg', 'Gascoigne', 'Paul', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/641/84964499_original.jpg', 'Nedved', 'Pavel', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/637/57077387_original.jpg', 'Costa', 'Rui', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
-(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/625/79592554_original.jpg', 'Gullit', 'Ruud', '123456789', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345');
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/623/633879_original.jpg', 'Suker', 'Davor ', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/968/560/56594393_original.jpg', 'Kluivert', 'Patrick', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/627/56716733_original.jpg', 'Conti', 'Bruno', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/968/554/hector-pedro-scarone_original.jpg', 'Scarone', 'Hector', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/664/682652_original.jpg', 'Batistuta', 'Gabriel', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/634/1032056_original.jpg', 'Taffarel', 'Claudio', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/639/1110911_original.jpg', 'Gascoigne', 'Paul', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/641/84964499_original.jpg', 'Nedved', 'Pavel', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/637/57077387_original.jpg', 'Costa', 'Rui', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
+(NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/625/79592554_original.jpg', 'Gullit', 'Ruud', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345');
 
 INSERT INTO `Booking` (`BookingID`, `Guest_ID`, `Date_Made`, `Website_Reservation`) VALUES 
 (NULL, '1', '2020-11-10', '1'),

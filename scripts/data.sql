@@ -9,3 +9,4 @@ UPDATE `Invoice` SET `Date_Checkout` = '2020-11-11' WHERE `Invoice`.`Invoice_ID`
 UPDATE `Invoice` SET `Date_Checkout` = '2020-12-26' WHERE `Invoice`.`Invoice_ID` = 5; 
 UPDATE `Invoice` SET `Date_Checkout` = '2020-12-24' WHERE `Invoice`.`Invoice_ID` = 6; 
 UPDATE `Invoice` SET `Date_Checkout` = '2020-12-25' WHERE `Invoice`.`Invoice_ID` = 7;
+UPDATE `Guest` SET `Phone_Number` = '7143456789', `Address` = '6789 Hollywood Blvd, Los Angeles, CA 12345', `Email` = 'paul123456789@gmail.com', `ID_Info` = '888123456' WHERE `Guest`.`Guest_ID` = 7;

@@ -1,10 +1,14 @@
 <?php 
-    
     $pickedDate = date("m/d/Y");
-    if(isset($_POST['submit'])){
+    if(isset($_POST['submit'])){        
         if (!empty($_POST['datepicker'])){
-            $pickedDate = $_POST['datepicker'];        
-        }
+            $date = $_POST['datepicker'];  
+            $d = DateTime::createFromFormat('m/d/Y', $date);
+            if ($d && $d->format('m/d/Y') == $date) {   // make sure $date is valid 
+                $pickedDate = $date;
+            }
+
+        }    
     }
 
  ?>
