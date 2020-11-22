@@ -81,7 +81,7 @@ include "menu.php";
                                                     
                                                             <p class="text-left">Date: <?php echo date("Y-m-d");?></p>
                                                             <?php
-                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),'2020-11-22');
+                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d"));
                                                                if(isset($getresultfromnow[0]['Guest_ID'])){
                                                                  $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
                                                             ?>
