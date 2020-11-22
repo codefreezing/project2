@@ -1,3 +1,8 @@
+<?php
+// Start the session
+session_start();
+$_SESSION["menu"] = 6;
+?>
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,4 +1,4 @@
- <!-- MENU SIDEBAR-->
+<!-- MENU SIDEBAR-->
  <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
@@ -17,21 +17,21 @@ $cap5 = "";
 $cap6 = "";
 $cap7 = "";
 $cap8 = "";
-if($_SERVER['REQUEST_URI'] == "/index.php"){
+if($_SESSION["menu"] == 1){
     $cap1 = "active";
-}else if($_SERVER['REQUEST_URI'] == "/room_list.php"){
+}else if($_SESSION["menu"] == 2){
     $cap2 = "active";
-}else if($_SERVER['REQUEST_URI'] == "/reservation.php"){
+}else if($_SESSION["menu"] == 3){
     $cap3 = "active";
-}else if($_SERVER['REQUEST_URI'] == "/house_keeping.php"){
+}else if($_SESSION["menu"] == 4){
     $cap4 = "active";
-}else if($_SERVER['REQUEST_URI'] == "/guest_information.php"){
+}else if($_SESSION["menu"] == 5){
     $cap5 = "active";
-}else if($_SERVER['REQUEST_URI'] == "/current_stay.php"){
+}else if($_SESSION["menu"] == 6){
     $cap6 = "active";
-}else if($_SERVER['REQUEST_URI'] == "/cap7-search-guests.php"){
+}else if($_SESSION["menu"] == 7){
     $cap7 = "active";
-}else if($_SERVER['REQUEST_URI'] == "/cap8-daily-report.php"){
+}else if($_SESSION["menu"] == 8){
     $cap8 = "active";
 }
                         ?>

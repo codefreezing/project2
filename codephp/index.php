@@ -1,3 +1,8 @@
+<?php
+// Start the session
+session_start();
+$_SESSION["menu"] = 1;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -129,7 +134,7 @@ and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.
                             </div>
                         </div>
 <?php
-$roomlist = DB::query("SELECT *  FROM Room, Price, Room_Status where Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.Room_Type");
+$roomlist = DB::query("SELECT *  FROM Room, Price, Room_Status where Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.Room_Type ORDER BY Room.Room_Number ASC");
 $temp = 1;
 foreach ($roomlist as $row) {
     if($temp == 1){
@@ -155,12 +160,20 @@ foreach ($roomlist as $row) {
     ?>
         <div class="card <?php echo $cssColor;?>">
         <?php
-        $roomNumber="";
   if($row['Room_Status_ID'] == 3 || $row['Room_Status_ID'] == 2){
     $roomNumber = $row['Room_Number'];
-  }
+  
         ?>
-            <a href="#" data-target="#largeModals<?php echo $roomNumber; ?>" data-toggle="modal">
+    <a href="#" data-target="#largeModals<?php echo $roomNumber; ?>" data-toggle="modal">
+            <?php
+  }else{
+   ?>
+
+    <a href="current_stay.php?roomid=<?php echo $row['Room_Number']; ?>">
+
+  <?php
+  }
+            ?>
                 <div class="card-body">
                     <h4 class="card-title mb-5 text-light">Room: <?php echo $row['Room_Number'];?>
                         <small>

@@ -1,3 +1,8 @@
+<?php
+// Start the session
+session_start();
+$_SESSION["menu"] = 8;
+?>
 <?php 
     $pickedDate = date("m/d/Y");
     if(isset($_POST['submit'])){        
