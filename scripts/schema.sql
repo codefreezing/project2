@@ -57,6 +57,13 @@ CREATE TABLE Room_Status
   PRIMARY KEY (Room_Status_ID)
 );
 
+CREATE TABLE Housekeeper
+(
+  HID INT NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(30) NOT NULL,
+  PRIMARY KEY (HID)
+);
+
 CREATE TABLE Room
 (
   Room_Number INT NOT NULL,
@@ -96,16 +103,19 @@ CREATE TABLE Record
 
 CREATE TABLE Housekeeping
 (
-  Room_Number INT NOT NULL,
   Bathroom INT NOT NULL,
   Towels INT NOT NULL,
   Bed_Sheets INT NOT NULL,
   Vacuum INT NOT NULL,
   Dusting INT NOT NULL,
   Electronics INT NOT NULL,
+  Room_Number INT NOT NULL,
+  HID INT NOT NULL,
   PRIMARY KEY (Room_Number),
-  FOREIGN KEY (Room_Number) REFERENCES Room(Room_Number)
+  FOREIGN KEY (Room_Number) REFERENCES Room(Room_Number),
+  FOREIGN KEY (HID) REFERENCES Housekeeper(HID)
 );
+
 
 CREATE TABLE Invoice_Rooms
 (
@@ -116,6 +126,13 @@ CREATE TABLE Invoice_Rooms
   FOREIGN KEY (Room_Number) REFERENCES Room(Room_Number)
 );
 
+
+INSERT INTO `Housekeeper` (`HID`, `Name`) VALUES 
+(NULL, 'Olivia'),
+(NULL, 'Alex'),
+(NULL, 'Peter'),
+(NULL, 'Emma'),
+(NULL, 'Mia');
 
 INSERT INTO `Record_Status` (`Record_Status_Code`, `Record_Status_Info`) VALUES
 (0, 'Reserved'),
@@ -167,32 +184,32 @@ INSERT INTO `Room` (`Room_Number`, `Room_Type`, `Room_Status_ID`) VALUES
 (504, 3, 0),
 (505, 0, 0);
 
-INSERT INTO `Housekeeping` (`Room_Number`, `Bathroom`, `Towels`, `Bed_Sheets`, `Vacuum`, `Dusting`, `Electronics`) VALUES 
-('101', '1', '1', '1', '1', '1', '1'),
-('102', '1', '1', '1', '1', '1', '1'),
-('103', '1', '1', '1', '1', '1', '1'),
-('104', '1', '1', '1', '1', '1', '1'),
-('105', '1', '1', '1', '1', '1', '1'),
-('201', '1', '1', '1', '1', '1', '1'),
-('202', '1', '1', '1', '1', '1', '1'),
-('203', '1', '1', '1', '1', '1', '1'),
-('204', '1', '1', '1', '1', '1', '1'),
-('205', '1', '1', '1', '1', '1', '1'),
-('301', '1', '1', '1', '1', '1', '1'),
-('302', '1', '1', '1', '1', '1', '1'),
-('303', '1', '1', '1', '1', '1', '1'),
-('304', '1', '1', '1', '1', '1', '1'),
-('305', '1', '1', '1', '1', '1', '1'),
-('401', '1', '1', '1', '1', '1', '1'),
-('402', '1', '1', '1', '1', '1', '1'),
-('403', '1', '1', '1', '1', '1', '1'),
-('404', '1', '1', '1', '1', '1', '1'),
-('405', '1', '1', '1', '1', '1', '1'),
-('501', '1', '1', '1', '1', '1', '1'),
-('502', '1', '1', '1', '1', '1', '1'),
-('503', '1', '1', '1', '1', '1', '1'),
-('504', '1', '1', '1', '1', '1', '1'),
-('505', '1', '1', '1', '1', '1', '1');
+INSERT INTO `Housekeeping` (`Room_Number`, `Bathroom`, `Towels`, `Bed_Sheets`, `Vacuum`, `Dusting`, `Electronics`, `HID`) VALUES 
+('101', '1', '1', '1', '1', '1', '1','1'),
+('102', '1', '1', '1', '1', '1', '1','1'),
+('103', '1', '1', '1', '1', '1', '1','1'),
+('104', '1', '1', '1', '1', '1', '1','1'),
+('105', '1', '1', '1', '1', '1', '1','1'),
+('201', '1', '1', '1', '1', '1', '1','2'),
+('202', '1', '1', '1', '1', '1', '1','2'),
+('203', '1', '1', '1', '1', '1', '1','2'),
+('204', '1', '1', '1', '1', '1', '1','2'),
+('205', '1', '1', '1', '1', '1', '1','2'),
+('301', '1', '1', '1', '1', '1', '1','3'),
+('302', '1', '1', '1', '1', '1', '1','3'),
+('303', '1', '1', '1', '1', '1', '1','3'),
+('304', '1', '1', '1', '1', '1', '1','3'),
+('305', '1', '1', '1', '1', '1', '1','3'),
+('401', '1', '1', '1', '1', '1', '1','4'),
+('402', '1', '1', '1', '1', '1', '1','4'),
+('403', '1', '1', '1', '1', '1', '1','4'),
+('404', '1', '1', '1', '1', '1', '1','4'),
+('405', '1', '1', '1', '1', '1', '1','4'),
+('501', '1', '1', '1', '1', '1', '1','5'),
+('502', '1', '1', '1', '1', '1', '1','5'),
+('503', '1', '1', '1', '1', '1', '1','5'),
+('504', '1', '1', '1', '1', '1', '1','5'),
+('505', '1', '1', '1', '1', '1', '1','5');
 
 INSERT INTO `Guest` (`Guest_ID`, `Photo`, `Lname`, `Fname`, `Phone_Number`, `Address`, `Email`, `ID_Info`, `Vehicle`, `License_Plate`) VALUES 
 (NULL, 'https://cdn.bleacherreport.net/images_root/slides/photos/000/948/623/633879_original.jpg', 'Suker', 'Davor ', '1234567890', '12345 Coast Dr, Long Beach, CA 12345', '123456789@gmail.com', '123456789', 'CA D12456789', '7C12345'),
@@ -385,3 +402,16 @@ INSERT INTO `Invoice_Rooms` (`Invoice_ID`, `Room_Number`) VALUES ('7', '501');
 UPDATE `Room` SET `Room_Status_ID` = '1' WHERE `Room`.`Room_Number` = 501;
 
 UPDATE `Housekeeping` SET `Bathroom` = '0', `Towels` = '0', `Bed_Sheets` = '0', `Vacuum` = '0', `Dusting` = '0', `Electronics` = '0' WHERE `Housekeeping`.`Room_Number` = 501;
+
+UPDATE `Room` SET `Room_Status_ID` = '3' WHERE `Room`.`Room_Number` = 301; 
+UPDATE `Room` SET `Room_Status_ID` = '3' WHERE `Room`.`Room_Number` = 404; 
+UPDATE `Room` SET `Room_Status_ID` = '2' WHERE `Room`.`Room_Number` = 204; 
+UPDATE `Room` SET `Room_Status_ID` = '2' WHERE `Room`.`Room_Number` = 401; 
+UPDATE `Invoice` SET `Date_Checkout` = '2020-11-18' WHERE `Invoice`.`Invoice_ID` = 1; 
+UPDATE `Invoice` SET `Date_Checkout` = '2020-11-16' WHERE `Invoice`.`Invoice_ID` = 2; 
+UPDATE `Invoice` SET `Date_Checkout` = '2020-11-14' WHERE `Invoice`.`Invoice_ID` = 3; 
+UPDATE `Invoice` SET `Date_Checkout` = '2020-11-11' WHERE `Invoice`.`Invoice_ID` = 4; 
+UPDATE `Invoice` SET `Date_Checkout` = '2020-12-26' WHERE `Invoice`.`Invoice_ID` = 5; 
+UPDATE `Invoice` SET `Date_Checkout` = '2020-12-24' WHERE `Invoice`.`Invoice_ID` = 6; 
+UPDATE `Invoice` SET `Date_Checkout` = '2020-12-25' WHERE `Invoice`.`Invoice_ID` = 7;
+UPDATE `Guest` SET `Phone_Number` = '7143456789', `Address` = '6789 Hollywood Blvd, Los Angeles, CA 12345', `Email` = 'paul123456789@gmail.com', `ID_Info` = '888123456' WHERE `Guest`.`Guest_ID` = 7;
