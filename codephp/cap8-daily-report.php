@@ -122,7 +122,7 @@ foreach ($roomlist as $row):
                                         <td><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></td>
                                         <td><?php echo htmlspecialchars($row['Date_Checked_in']); ?></td>
                                         <td><?php echo $row['Record_Status_Code'] == 1  ? 'Not Yet' : htmlspecialchars($row['Date_Checkout']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['Amound_Paid']); ?></td>
+                                        <td>$<?php echo htmlspecialchars($row['Amound_Paid']); ?></td>
                                     </tr>
 <?php endforeach; ?>                                                                        
                                     <tr class='thead-light'>
@@ -130,7 +130,7 @@ foreach ($roomlist as $row):
                                         <th></th>
                                         <th></th>
                                         <th></th>
-                                        <th><?php echo $totalPaid; ?></th>
+                                        <th>$<?php echo $totalPaid; ?></th>
                                     </tr>
                                 </tbody>
                             </table>
