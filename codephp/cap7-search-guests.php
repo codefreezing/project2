@@ -5,6 +5,7 @@ $_SESSION["menu"] = 7;
 ?>
 <?php     
     $keySearch = "";   
+    $dateShow = "";
     $optionValue = "0"; 
     if(isset($_POST['submit'])){     
         $optionValue = $_POST['typeOption'];           
@@ -12,7 +13,8 @@ $_SESSION["menu"] = 7;
         $date = htmlspecialchars($_POST['textSearch']);  
         $d = DateTime::createFromFormat('m/d/Y', $date);
         if ($d && $d->format('m/d/Y') == $date) {   // make sure $date is valid             
-            $keySearch = date("Y-m-d", strtotime($date));            
+            $keySearch = date("Y-m-d", strtotime($date));   
+            $dateShow = date("m/d/Y", strtotime($date));      
         } else {
             $keySearch = $date;
             $keySearch = preg_replace("/\s+/", "", $keySearch); // remove all spaces
@@ -153,8 +155,8 @@ foreach ($guestList as $row):
                                         <p>
                                             Phone: <?php echo htmlspecialchars($row['Phone_Number']); ?> <br>
                                             Room: <?php echo htmlspecialchars($row['Room_Number']) ?> <br>
-                                            Check In: <?php echo htmlspecialchars($row['Check_In_Date']) ?> <br>
-                                            Check Out: <?php echo htmlspecialchars($row['Check_Out_Date']) ?>
+                                            Check In: <?php echo htmlspecialchars(date("m/d/Y", strtotime($row['Check_In_Date']))); ?> <br>
+                                            Check Out: <?php echo htmlspecialchars(date("m/d/Y", strtotime($row['Check_Out_Date']))); ?>
                                         </p>
                                         </div>
                                     </div>
@@ -222,7 +224,7 @@ include "footer.php";
     
     document.getElementById("dateOption").selectedIndex = "<?php echo htmlspecialchars($optionValue); ?>"; 
     addDatePicker();
-    document.getElementById("datepicker").defaultValue = "<?php echo htmlspecialchars($keySearch); ?>";
+    document.getElementById("datepicker").defaultValue = "<?php echo $dateShow == "" ? $keySearch: $dateShow;  ?>";
 
 </script>
 

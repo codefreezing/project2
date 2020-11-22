@@ -125,8 +125,8 @@ foreach ($roomlist as $row):
                                     <tr>
                                         <td><?php echo htmlspecialchars($row['Room_Number']); ?></td>
                                         <td><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['Date_Checked_in']); ?></td>
-                                        <td><?php echo $row['Record_Status_Code'] == 1  ? 'Not Yet' : htmlspecialchars($row['Date_Checkout']); ?></td>
+                                        <td><?php echo htmlspecialchars(date("m/d/Y", strtotime($row['Date_Checked_in']))); ?></td>
+                                        <td><?php echo $row['Record_Status_Code'] == 1  ? 'Not Yet' : htmlspecialchars(date("m/d/Y", strtotime($row['Date_Checkout']))); ?></td>
                                         <td>$<?php echo htmlspecialchars($row['Amound_Paid']); ?></td>
                                     </tr>
 <?php endforeach; ?>                                                                        
