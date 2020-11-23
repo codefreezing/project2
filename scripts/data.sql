@@ -1,2 +1,0 @@
-UPDATE `Housekeeping` SET `Bathroom` = '0', `Towels` = '0', `Bed_Sheets` = '0', `Vacuum` = '0', `Dusting` = '0', `Electronics` = '0' WHERE `Housekeeping`.`Room_Number` = 404;
-UPDATE `Housekeeping` SET `Bathroom` = '0', `Towels` = '0', `Bed_Sheets` = '0', `Vacuum` = '0', `Dusting` = '0', `Electronics` = '0' WHERE `Housekeeping`.`Room_Number` = 301;

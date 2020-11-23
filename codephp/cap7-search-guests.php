@@ -116,7 +116,7 @@ if ($keySearch == ""):
     <div class="row m-l-0">
 <?php else:
 
-$guestList = DB::query("SELECT Booking.BookingID AS BID, Photo, Lname, Fname, Address, Phone_Number, Room_Number, Check_In_Date, Check_Out_Date
+$guestList = DB::query("SELECT Booking.BookingID AS BID, Photo, Lname, Fname, Address, Phone_Number, Room_Number, Check_In_Date, Check_Out_Date, Guest.Guest_ID AS Guest_ID
 FROM (
     SELECT Room_Number, BookingID, MIN(Date) AS Check_In_Date, ADDDATE(MIN(Date),COUNT(*)) AS Check_Out_Date
     FROM Record
@@ -149,7 +149,7 @@ foreach ($guestList as $row):
                                         </div>
                                         <div class = "col-6 text-light">
                                         <blockquote>
-                                            <h4 class="text-light"><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></h4>
+                                            <h4 class="text-light"><a href="./guest_information.php?guestid=<?php echo htmlspecialchars($row['Guest_ID']); ?>" class="btn btn-primary px-0"><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></a></h4>
                                             <small><cite title="Source Title"><?php echo htmlspecialchars($row['Address']); ?><i class="icon-map-marker"></i></cite></small>
                                         </blockquote>
                                         <p>

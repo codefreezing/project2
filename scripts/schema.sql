@@ -77,8 +77,8 @@ CREATE TABLE Room
 CREATE TABLE Invoice
 (
   Invoice_ID INT NOT NULL AUTO_INCREMENT,
-  Date_Checked_In DATE NOT NULL,
-  Date_Checkout DATE NOT NULL,
+  Date_Checked_In DATETIME NOT NULL,
+  Date_Checkout DATETIME NOT NULL,
   Payment_Made INT NOT NULL,
   Total_Charge INT NOT NULL,
   Completed INT NOT NULL,
@@ -88,6 +88,8 @@ CREATE TABLE Invoice
   FOREIGN KEY (Guest_ID) REFERENCES Guest(Guest_ID),
   FOREIGN KEY (Booking_ID) REFERENCES Booking(BookingID)
 );
+
+
 
 CREATE TABLE Record
 (
@@ -233,7 +235,8 @@ INSERT INTO `Booking` (`BookingID`, `Guest_ID`, `Date_Made`, `Website_Reservatio
 (NULL, '7', '2020-11-11', '1'),
 (NULL, '8', '2020-11-11', '1'),
 (NULL, '9', '2020-11-11', '1'),
-(NULL, '10', '2020-11-11', '1');
+(NULL, '10', '2020-11-11', '1'),
+(NULL, '7', '2020-11-12', '1');
 
 INSERT INTO `Record` (`Date`, `Room_Number`, `BookingID`, `Record_Status_Code`) VALUES 
 ('2020-12-23', '101', '1', '0'),
@@ -333,12 +336,15 @@ INSERT INTO `Record` (`Date`, `Room_Number`, `BookingID`, `Record_Status_Code`) 
 ('2020-12-23', '202', '4', '1');
 
 INSERT INTO `Invoice` (`Invoice_ID`, `Date_Checked_In`, `Date_Checkout`, `Payment_Made`, `Total_Charge`, `Completed`, `Guest_ID`, `Booking_ID`) VALUES 
-(NULL, '2020-11-15', '2020-11-17', '600', '600', '1', '5', '5'),
-(NULL, '2020-11-14', '2020-11-15', '800', '800', '1', '6', '6'),
-(NULL, '2020-11-11', '2020-11-13', '600', '600', '1', '7', '7'),
-(NULL, '2020-11-09', '2020-11-10', '800', '800', '1', '8', '8'),
-(NULL, '2020-11-17', '2020-12-25', '11000', '15600', '0', '3', '3'),
-(NULL, '2020-11-18', '2020-12-23', '10000', '14400', '0', '4', '4');
+(NULL, '2020-11-15 14:02:29', '2020-11-18 09:54:29', '600', '600', '1', '5', '5'),
+(NULL, '2020-11-14 14:02:29', '2020-11-16 09:54:29', '800', '800', '1', '6', '6'),
+(NULL, '2020-11-11 14:02:29', '2020-11-14 09:54:29', '600', '600', '1', '7', '7'),
+(NULL, '2020-11-09 14:02:29', '2020-11-11 09:54:29', '800', '800', '1', '8', '8'),
+(NULL, '2020-11-17 14:02:29', '2020-12-26 09:54:29', '11000', '15600', '0', '3', '3'),
+(NULL, '2020-11-18 14:02:29', '2020-12-24 09:54:29', '10000', '14400', '0', '4', '4'),
+(NULL, '2020-11-17 14:02:29', '2020-12-25 09:54:29', '7000', '76000', '0', '9', '11');
+
+
 
 INSERT INTO `Invoice_Rooms` (`Invoice_ID`, `Room_Number`) VALUES 
 ('1', '301'), 
@@ -352,8 +358,6 @@ UPDATE `Housekeeping` SET `Bathroom` = '0', `Towels` = '0', `Bed_Sheets` = '0', 
 
 UPDATE `Room` SET `Room_Status_ID` = '1' WHERE `Room`.`Room_Number` = 102; UPDATE `Room` SET `Room_Status_ID` = '1' WHERE `Room`.`Room_Number` = 202;
 
-INSERT INTO `Booking` (`BookingID`, `Guest_ID`, `Date_Made`, `Website_Reservation`) VALUES 
-(NULL, '7', '2020-11-12', '1');
 
 INSERT INTO `Record` (`Date`, `Room_Number`, `BookingID`, `Record_Status_Code`) VALUES 
 ('2020-11-17', '501', '11', '1'),
@@ -395,9 +399,6 @@ INSERT INTO `Record` (`Date`, `Room_Number`, `BookingID`, `Record_Status_Code`) 
 ('2020-12-23', '501', '11', '1'),
 ('2020-12-24', '501', '11', '1');
 
-INSERT INTO `Invoice` (`Invoice_ID`, `Date_Checked_In`, `Date_Checkout`, `Payment_Made`, `Total_Charge`, `Completed`, `Guest_ID`, `Booking_ID`) VALUES (NULL, '2020-11-17', '2020-12-24', '7000', '76000', '0', '9', '11');
-
-INSERT INTO `Invoice_Rooms` (`Invoice_ID`, `Room_Number`) VALUES ('7', '501');
 
 UPDATE `Room` SET `Room_Status_ID` = '1' WHERE `Room`.`Room_Number` = 501;
 
@@ -407,11 +408,9 @@ UPDATE `Room` SET `Room_Status_ID` = '3' WHERE `Room`.`Room_Number` = 301;
 UPDATE `Room` SET `Room_Status_ID` = '3' WHERE `Room`.`Room_Number` = 404; 
 UPDATE `Room` SET `Room_Status_ID` = '2' WHERE `Room`.`Room_Number` = 204; 
 UPDATE `Room` SET `Room_Status_ID` = '2' WHERE `Room`.`Room_Number` = 401; 
-UPDATE `Invoice` SET `Date_Checkout` = '2020-11-18' WHERE `Invoice`.`Invoice_ID` = 1; 
-UPDATE `Invoice` SET `Date_Checkout` = '2020-11-16' WHERE `Invoice`.`Invoice_ID` = 2; 
-UPDATE `Invoice` SET `Date_Checkout` = '2020-11-14' WHERE `Invoice`.`Invoice_ID` = 3; 
-UPDATE `Invoice` SET `Date_Checkout` = '2020-11-11' WHERE `Invoice`.`Invoice_ID` = 4; 
-UPDATE `Invoice` SET `Date_Checkout` = '2020-12-26' WHERE `Invoice`.`Invoice_ID` = 5; 
-UPDATE `Invoice` SET `Date_Checkout` = '2020-12-24' WHERE `Invoice`.`Invoice_ID` = 6; 
-UPDATE `Invoice` SET `Date_Checkout` = '2020-12-25' WHERE `Invoice`.`Invoice_ID` = 7;
+
 UPDATE `Guest` SET `Phone_Number` = '7143456789', `Address` = '6789 Hollywood Blvd, Los Angeles, CA 12345', `Email` = 'paul123456789@gmail.com', `ID_Info` = '888123456' WHERE `Guest`.`Guest_ID` = 7;
+
+
+UPDATE `Housekeeping` SET `Bathroom` = '0', `Towels` = '0', `Bed_Sheets` = '0', `Vacuum` = '0', `Dusting` = '0', `Electronics` = '0' WHERE `Housekeeping`.`Room_Number` = 404;
+UPDATE `Housekeeping` SET `Bathroom` = '0', `Towels` = '0', `Bed_Sheets` = '0', `Vacuum` = '0', `Dusting` = '0', `Electronics` = '0' WHERE `Housekeeping`.`Room_Number` = 301;
