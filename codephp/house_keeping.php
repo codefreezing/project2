@@ -18,6 +18,34 @@ $_SESSION["menu"] = 4;
 
 <body class="animsition">
 
+    <?php
+    if (isset($_POST["submit"])) {
+
+        $temp = isset($_POST["temp"]) ? $_POST["temp"] : 0;
+        $room_number = isset($_POST["room_number"]) ? $_POST["room_number"] : 0;
+        $room_status_id = isset($_POST["room_status_id"]) ? $_POST["room_status_id"] : 0;
+
+
+        $result_bath = isset($_POST["check_bath{$temp}"]) && $_POST["check_bath{$temp}"]  ? "1" : "0";
+        $result_towel = isset($_POST["check_towel{$temp}"]) && $_POST["check_towel{$temp}"]  ? "1" : "0";
+        $result_sheet = isset($_POST["check_sheet{$temp}"]) && $_POST["check_sheet{$temp}"]  ? "1" : "0";
+        $result_vacumn = isset($_POST["check_vacumn{$temp}"]) && $_POST["check_vacumn{$temp}"]  ? "1" : "0";
+        $result_dusting = isset($_POST["check_dusting{$temp}"]) && $_POST["check_dusting{$temp}"]  ? "1" : "0";
+        $result_elec = isset($_POST["check_elec{$temp}"]) && $_POST["check_elec{$temp}"]  ? "1" : "0";
+
+        $checkquery = DB::query("UPDATE Housekeeping SET Bathroom=%i, Towels=%i, Bed_Sheets=%i, Vacuum=%i, Dusting=%i, Electronics=%i
+    WHERE Room_Number=%s", $result_bath, $result_towel, $result_sheet, $result_vacumn, $result_dusting, $result_elec, $room_number);
+
+        debug($room_number);
+        $checkquery = $temp . "a:" . $result_bath . ":" . $result_towel . ":" . $result_sheet . ":" . $result_vacumn . ":" . $result_dusting . ":" . $result_elec . ":" . $room_number;
+        debug($checkquery);
+
+        $count_done = ($result_bath == 1 && $result_towel == 1 && $result_sheet == 1 && $result_vacumn == 1 && $result_dusting == 1 && $result_elec == 1);
+        if (($count_done) && ($room_status_id  == 3))
+            DB::update('Room', ['Room_Status_ID' => 0], "Room_Number=%s", $room_number);
+    }
+
+    ?>
     <div class="page-wrapper">
 
 
@@ -198,25 +226,6 @@ and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.
 
                                                 <div class="collapse multi-collapse" id="clean-options<?php echo $temp; ?>">
 
-                                                    <?php
-                                                    if (isset($_POST["submit{$temp}"])) {
-
-                                                        $result_bath = isset($_POST["check_bath{$temp}"]) && $_POST["check_bath{$temp}"]  ? "1" : "0";
-                                                        $result_towel = isset($_POST["check_towel{$temp}"]) && $_POST["check_towel{$temp}"]  ? "1" : "0";
-                                                        $result_sheet = isset($_POST["check_sheet{$temp}"]) && $_POST["check_sheet{$temp}"]  ? "1" : "0";
-                                                        $result_vacumn = isset($_POST["check_vacumn{$temp}"]) && $_POST["check_vacumn{$temp}"]  ? "1" : "0";
-                                                        $result_dusting = isset($_POST["check_dusting{$temp}"]) && $_POST["check_dusting{$temp}"]  ? "1" : "0";
-                                                        $result_elec = isset($_POST["check_elec{$temp}"]) && $_POST["check_elec{$temp}"]  ? "1" : "0";
-
-                                                        DB::query("UPDATE Housekeeping SET Bathroom=%i, Towels=%i, Bed_Sheets=%i, Vacuum=%i, Dusting=%i, Electronics=%i
-                                                        WHERE Room_Number=%s", $result_bath, $result_towel, $result_sheet, $result_vacumn, $result_dusting, $result_elec, $row['Room_Number']);
-
-                                                        $count_done = ($result_bath == 1 && $result_towel == 1 && $result_sheet == 1 && $result_vacumn == 1 && $result_dusting == 1 && $result_elec == 1);
-                                                        if (($count_done) && ($row['Room_Status_ID'] == 3))
-                                                            DB::update('Room', ['Room_Status_ID' => 0], "Room_Number=%s", $row['Room_Number']);
-                                                    }
-
-                                                    ?>
 
 
                                                     <form action="house_keeping.php" method="POST">
@@ -315,64 +324,68 @@ and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.
                                                         </div>
 
 
-                                                        <div class="text-center pb-3 pt-3">
-                                                            <form action="" method="POST">
-                                                                <button type="submit" class="btn btn-success" name="submit<?php echo $temp; ?>" id="submit<?php echo $temp; ?>">Submit
-                                                                </button>
-                                                            </form>
-
-                                                        </div>
+                                                        <input type="hidden" name="temp" value="<?php echo $temp; ?>">
+                                                        <input type="hidden" name="room_number" value="<?php echo $row['Room_Number']; ?>">
+                                                        <input type="hidden" name="room_status_id" value="<?php echo $row['Room_Status_ID']; ?>">
 
                                                         <div class="text-center pb-3 pt-3">
-                                                            <a role="button" href="house_keeping.php?update=<?php echo $row['Room_Number']; ?>" class="btn btn-success text-decoration-none type=" submit" name="convert-room<?php echo $temp ?>">Convert to <br>Maintenance
-                                                            </a>
-                                                        </div>
-
-
+                                                            <!-- <form action="" method="POST"> -->
+                                                            <button type="submit" class="btn btn-success" name="submit" id="submit<?php echo $temp; ?>">Submit
+                                                                <!-- </button> -->
                                                     </form>
 
-                                                    <?php
-
-
-                                                    ?>
-
-
                                                 </div>
+
+                                                <div class="text-center pb-3 pt-3">
+                                                    <button onclick="location.href='house_keeping.php?update=<?php echo $row['Room_Number']; ?>'" class="btn btn-success" type="submit" name="convert-room<?php echo $temp ?>">Convert to <br>Maintenance
+                                                    </button>
+                                                </div>
+
+
+                                                </form>
+
+                                                <?php
+
+
+                                                ?>
+
+
                                             </div>
-                                        </a>
                                     </div>
+                                    </a>
+                                </div>
 
                                 </div>
 
                                 <?php
                                 if ($temp % 3 == 0) {
                                 ?>
-                                </div>
+                    </div>
 
-                                <div class="row">
+                    <div class="row">
 
-                            <?php
+                <?php
                                 }
                                 $temp++;
                             }
-                            ?>
-                                </div>
-
-                                <!---- COPYRIGHT --->
-                                <div class="col-md-12">
-                                    <div class="copyright">
-                                        <p>Copyright © 2020.</p>
-                                    </div>
-                                </div>
-
-
+                ?>
                     </div>
 
+                    <!---- COPYRIGHT --->
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2020.</p>
+                        </div>
+                    </div>
+
+
                 </div>
+
             </div>
         </div>
-        <!-- END MAIN CONTENT-->
-        <!-- END PAGE CONTAINER-->
+    </div>
+    <!-- END MAIN CONTENT-->
+    <!-- END PAGE CONTAINER-->
     </div>
 
     </div>
