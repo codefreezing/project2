@@ -3,10 +3,7 @@
 session_start();
 $_SESSION["menu"] = 4;
 ?>
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 <!DOCTYPE html>
 <html lang="en">
 
