@@ -31,6 +31,8 @@ include "menu.php";
 if(isset($_GET['update'])){
     $roomIdNumber = $_GET['update'];
     DB::update('Room', ['Room_Status_ID' => 0], "Room_Number=%s", $roomIdNumber);
+    DB::query("UPDATE Housekeeping SET Bathroom=1, Towels=1, Bed_Sheets=1, Vacuum=1, Dusting=1, Electronics=1
+    WHERE Room_Number=%s", $roomIdNumber);
 }
 
 

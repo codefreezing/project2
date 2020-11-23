@@ -118,12 +118,12 @@ include "menu.php";
                                                 $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+1 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
-                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-secondary btntext">
+                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php date("Y-m-d", strtotime('+1 day')); ?>" class="btn btn-secondary btntext">
                                                 <?php
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-secondary btntext">
+                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+1 day')); ?>" class="btn btn-secondary btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -149,12 +149,12 @@ include "menu.php";
                                                 $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+2 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
-                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-success btntext">
+                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+2 day')); ?>" class="btn btn-success btntext">
                                                 <?php
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-success btntext">
+                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+2 day')); ?>" class="btn btn-success btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -180,12 +180,12 @@ include "menu.php";
                                                 $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+3 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
-                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-danger btntext">
+                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+3 day')); ?>" class="btn btn-danger btntext">
                                                 <?php
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-danger btntext">
+                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+3 day')); ?>" class="btn btn-danger btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -211,12 +211,12 @@ include "menu.php";
                                                 $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+4 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
-                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-warning btntext">
+                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+4 day')); ?>" class="btn btn-warning btntext">
                                                 <?php
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-warning btntext">
+                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+4 day')); ?>" class="btn btn-warning btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -242,12 +242,12 @@ include "menu.php";
                                                 $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+5 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
-                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-info btntext">
+                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+5 day')); ?>" class="btn btn-info btntext">
                                                 <?php
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-info btntext">
+                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+5 day')); ?>" class="btn btn-info btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -273,12 +273,12 @@ include "menu.php";
                                                 $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+6 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
-                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-dark btntext">
+                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+6 day')); ?>" class="btn btn-dark btntext">
                                                 <?php
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-dark btntext">
+                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+6 day')); ?>" class="btn btn-dark btntext">
                                                 <?php
                                                 }
                                                 ?>
