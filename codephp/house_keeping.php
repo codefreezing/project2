@@ -1,3 +1,9 @@
+<?php
+// Start the session
+session_start();
+$_SESSION["menu"] = 4;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,13 +32,10 @@
         <div class="page-container">
             <?php
 
-
             if (isset($_GET['update'])) {
                 $roomIdNumber = $_GET['update'];
                 DB::update('Room', ['Room_Status_ID' => 2], "Room_Number=%s", $roomIdNumber);
             }
-
-
 
 
             $numberAvailable = DB::query("SELECT count(*) as numberAvailable FROM Room, Price, Room_Status where Room_Status.Room_Status_ID = 0 
@@ -53,7 +56,6 @@ and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-
 
                         </div>
                     </div>
@@ -102,9 +104,8 @@ and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.
                         </div>
                         <?php
                         $roomlist = DB::query("SELECT *  FROM Room, Price, Room_Status, Housekeeping, Housekeeper where Room.Room_Number = Housekeeping.Room_Number and Room_Status.Room_Status_ID = 1
-                        and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.Room_Type OR Room.Room_Number = Housekeeping.Room_Number and Room_Status.Room_Status_ID = 3
-                        and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.Room_Type");
-
+                        and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.Room_Type and Housekeeping.HID = Housekeeper.HID OR Room.Room_Number = Housekeeping.Room_Number and Room_Status.Room_Status_ID = 3
+                        and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.Room_Type and Housekeeping.HID = Housekeeper.HID");
 
                         $temp = 1;
                         foreach ($roomlist as $row) {
@@ -190,9 +191,6 @@ and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.
                                                 </div>
 
 
-
-
-
                                                 <div class="text-center pb-3 pt-3 ">
                                                     <button class="btn btn-primary btn-block" data-toggle="collapse" data-target="#clean-options<?php echo $temp; ?>" aria-expanded="true" aria-controls="clean-options">Show Status</button>
                                                 </div>
@@ -210,26 +208,15 @@ and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.
                                                         $result_dusting = isset($_POST["check_dusting{$temp}"]) && $_POST["check_dusting{$temp}"]  ? "1" : "0";
                                                         $result_elec = isset($_POST["check_elec{$temp}"]) && $_POST["check_elec{$temp}"]  ? "1" : "0";
 
-                                                        //
                                                         DB::query("UPDATE Housekeeping SET Bathroom=%i, Towels=%i, Bed_Sheets=%i, Vacuum=%i, Dusting=%i, Electronics=%i
                                                         WHERE Room_Number=%s", $result_bath, $result_towel, $result_sheet, $result_vacumn, $result_dusting, $result_elec, $row['Room_Number']);
 
-                                                        //$count_done = DB::query("SELECT count(*) FROM Housekeeping where Bathroom = 1 and Towels = 1 and Bed_Sheets = 1 and Vacuum = 1 and Dusting = 1 and Electronics = 1 and Room_Number=%s", $row['Room_Number']);
-
                                                         $count_done = ($result_bath == 1 && $result_towel == 1 && $result_sheet == 1 && $result_vacumn == 1 && $result_dusting == 1 && $result_elec == 1);
-
-                                                        $all_checked_out = DB::query("SELECT * FROM Record WHERE Room_Number=%s ORDER BY 'Date' DESC", $row['Room_Number']);
-                                                        if ($count_done && $all_checked_out[0]['Record_Status_Code'] == 2)
+                                                        if (($count_done) && ($row['Room_Status_ID'] == 3))
                                                             DB::update('Room', ['Room_Status_ID' => 0], "Room_Number=%s", $row['Room_Number']);
-                                                        if ($count_done && $all_checked_out[0]['Record_Status_Code'] == 1)
-                                                            DB::update('Room', ['Room_Status_ID' => 1], "Room_Number=%s", $row['Room_Number']);
                                                     }
 
                                                     ?>
-
-                                                    <h2><?php
-
-                                                        ?></h2>
 
 
                                                     <form action="house_keeping.php" method="POST">
@@ -336,23 +323,18 @@ and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.
 
                                                         </div>
 
-
-
-
                                                         <div class="text-center pb-3 pt-3">
                                                             <a role="button" href="house_keeping.php?update=<?php echo $row['Room_Number']; ?>" class="btn btn-success text-decoration-none type=" submit" name="convert-room<?php echo $temp ?>">Convert to <br>Maintenance
                                                             </a>
                                                         </div>
-                                                        <?php
-                                                        // if (isset($_POST["convert-room{$temp}"])) {
-                                                        //     DB::query("UPDATE Room SET Room_Status_ID = 2 where Room_Number=%s", $room_num);
-                                                        // }
 
-                                                        ?>
 
                                                     </form>
 
+                                                    <?php
 
+
+                                                    ?>
 
 
                                                 </div>
@@ -369,17 +351,11 @@ and Room.Room_Status_ID = Room_Status.Room_Status_ID and Price.Room_Type = Room.
 
                                 <div class="row">
 
-
-
                             <?php
                                 }
                                 $temp++;
                             }
                             ?>
-
-
-
-
                                 </div>
 
                                 <!---- COPYRIGHT --->
