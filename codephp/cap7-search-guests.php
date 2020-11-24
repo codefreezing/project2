@@ -145,7 +145,7 @@ foreach ($guestList as $row):
                                 <div class="card-body bg-primary h-100">
                                     <div class = "row">
                                         <div class = "col-6">
-                                        <img src="<?php echo htmlspecialchars($row['Photo']); ?>"  alt="" class="img-rounded" >
+                                        <img src="<?php echo htmlspecialchars($row['Photo']); ?>"  alt="Image Not Available" class="text-light" >
                                         </div>
                                         <div class = "col-6 text-light">
                                         <blockquote>
