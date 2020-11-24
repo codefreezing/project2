@@ -83,10 +83,10 @@ include "menu.php";
                                                 </div>
                                                 <div class="card-body">
                                                 <?php
-                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d"));
-                                                if(isset($getresultfromnow[0]['Guest_ID'])){
+                                               $oneresult = DB::query("SELECT * FROM Record, Booking WHERE Record.BookingID = Booking.BookingID AND Record.Room_Number = %i AND Record.Date = %s",$row['Room_Number'],date("Y-m-d"));
+                                                if(isset($oneresult[0]['Guest_ID'])){
                                                 ?>
-                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-primary btntext">
+                                                <a href="current_stay.php?roomid=<?php echo $oneresult[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d"); ?>" class="btn btn-primary btntext">
                                                 <?php
 
                                                 }else{
@@ -99,8 +99,8 @@ include "menu.php";
                                                             <p class="text-left">Date: <?php echo date("Y-m-d");?></p>
                                                             <?php
                                                                
-                                                               if(isset($getresultfromnow[0]['Guest_ID'])){
-                                                                 $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
+                                                               if(isset($oneresult[0]['Guest_ID'])){
+                                                                 $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$oneresult[0]['Guest_ID']);
                                                             ?>
                                                                 <p class="text-left font-weight-bold"><?php 
                                                                 echo $getresultguestname[0]['Fname']; 
@@ -115,10 +115,10 @@ include "menu.php";
                                                             ?>                                                                                                     
                                                     </a>
                                                     <?php
-                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+1 day')));
+                                                $getresultfromnow = DB::query("SELECT * FROM Record, Booking WHERE Record.BookingID = Booking.BookingID AND Record.Room_Number = %i AND Record.Date = %s",$row['Room_Number'],date("Y-m-d", strtotime('+1 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
-                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php date("Y-m-d", strtotime('+1 day')); ?>" class="btn btn-secondary btntext">
+                                                <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+1 day')); ?>" class="btn btn-secondary btntext">
                                                 <?php
 
                                                 }else{
@@ -129,7 +129,7 @@ include "menu.php";
                                                 ?>
                                                         <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+1 day'));?></p>
                                                         <?php
-                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+1 day')));
+                                                            
                                                                if(isset($getresultfromnow[0]['Guest_ID'])){
                                                                  $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
                                                             ?>
@@ -146,7 +146,7 @@ include "menu.php";
                                                             ?>
                                                     </a>
                                                     <?php
-                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+2 day')));
+                                                $getresultfromnow = DB::query("SELECT * FROM Record, Booking WHERE Record.BookingID = Booking.BookingID AND Record.Room_Number = %i AND Record.Date = %s",$row['Room_Number'],date("Y-m-d", strtotime('+2 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
                                                 <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+2 day')); ?>" class="btn btn-success btntext">
@@ -160,7 +160,7 @@ include "menu.php";
                                                 ?>
                                                         <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+2 day'));?></p>
                                                         <?php
-                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+2 day')));
+                                                                
                                                                if(isset($getresultfromnow[0]['Guest_ID'])){
                                                                  $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
                                                             ?>
@@ -177,7 +177,7 @@ include "menu.php";
                                                             ?>
                                                     </a>
                                                     <?php
-                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+3 day')));
+                                                $getresultfromnow = DB::query("SELECT * FROM Record, Booking WHERE Record.BookingID = Booking.BookingID AND Record.Room_Number = %i AND Record.Date = %s",$row['Room_Number'],date("Y-m-d", strtotime('+3 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
                                                 <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+3 day')); ?>" class="btn btn-danger btntext">
@@ -191,7 +191,7 @@ include "menu.php";
                                                 ?>
                                                         <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+3 day'));?></p>
                                                         <?php
-                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+3 day')));
+                                                               
                                                                if(isset($getresultfromnow[0]['Guest_ID'])){
                                                                  $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
                                                             ?>
@@ -208,7 +208,7 @@ include "menu.php";
                                                             ?>
                                                     </a>
                                                     <?php
-                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+4 day')));
+                                                $getresultfromnow = DB::query("SELECT * FROM Record, Booking WHERE Record.BookingID = Booking.BookingID AND Record.Room_Number = %i AND Record.Date = %s",$row['Room_Number'],date("Y-m-d", strtotime('+4 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
                                                 <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+4 day')); ?>" class="btn btn-warning btntext">
@@ -222,7 +222,7 @@ include "menu.php";
                                                 ?>
                                                         <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+4 day'));?></p>
                                                         <?php
-                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+4 day')));
+                                                                
                                                                if(isset($getresultfromnow[0]['Guest_ID'])){
                                                                  $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
                                                             ?>
@@ -239,7 +239,7 @@ include "menu.php";
                                                             ?>
                                                     </a>
                                                     <?php
-                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+5 day')));
+                                                $getresultfromnow = DB::query("SELECT * FROM Record, Booking WHERE Record.BookingID = Booking.BookingID AND Record.Room_Number = %i AND Record.Date = %s",$row['Room_Number'],date("Y-m-d", strtotime('+5 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
                                                 <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+5 day')); ?>" class="btn btn-info btntext">
@@ -253,7 +253,7 @@ include "menu.php";
                                                 ?>
                                                         <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+5 day'));?></p>
                                                         <?php
-                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+5 day')));
+                                                              
                                                                if(isset($getresultfromnow[0]['Guest_ID'])){
                                                                  $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
                                                             ?>
@@ -270,7 +270,7 @@ include "menu.php";
                                                             ?>
                                                     </a>
                                                     <?php
-                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+6 day')));
+                                                $getresultfromnow = DB::query("SELECT * FROM Record, Booking WHERE Record.BookingID = Booking.BookingID AND Record.Room_Number = %i AND Record.Date = %s",$row['Room_Number'],date("Y-m-d", strtotime('+6 day')));
                                                 if(isset($getresultfromnow[0]['Guest_ID'])){
                                                 ?>
                                                 <a href="current_stay.php?roomid=<?php echo $getresultfromnow[0]['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+6 day')); ?>" class="btn btn-dark btntext">
@@ -284,7 +284,7 @@ include "menu.php";
                                                 ?>
                                                         <p class="text-left">Date: <?php echo date("Y-m-d", strtotime('+6 day'));?></p>
                                                         <?php
-                                                                $getresultfromnow = DB::query("SELECT * FROM Invoice_Rooms, Invoice WHERE Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID AND Invoice_Rooms.Room_Number = %i AND Invoice.Date_Checked_In <= %s AND Invoice.Date_Checkout >= %s",$row['Room_Number'],date("Y-m-d"),date("Y-m-d", strtotime('+6 day')));
+                                                               
                                                                if(isset($getresultfromnow[0]['Guest_ID'])){
                                                                  $getresultguestname = DB::query("SELECT * FROM Guest WHERE Guest.Guest_ID = %i",$getresultfromnow[0]['Guest_ID']);
                                                             ?>
