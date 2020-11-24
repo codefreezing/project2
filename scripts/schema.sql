@@ -350,7 +350,7 @@ INSERT INTO `Invoice_Rooms` (`Invoice_ID`, `Room_Number`) VALUES
 ('2', '302'),
 ('3', '501'), 
 ('4', '502'),
-('5', '101'), 
+('5', '102'), 
 ('6', '202');
 
 UPDATE `Housekeeping` SET `Bathroom` = '0', `Towels` = '0', `Bed_Sheets` = '0', `Vacuum` = '0', `Dusting` = '0', `Electronics` = '0' WHERE `Housekeeping`.`Room_Number` = 102; UPDATE `Housekeeping` SET `Bathroom` = '0', `Towels` = '0', `Bed_Sheets` = '0', `Vacuum` = '0', `Dusting` = '0', `Electronics` = '0' WHERE `Housekeeping`.`Room_Number` = 202;
