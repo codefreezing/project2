@@ -6,7 +6,7 @@ $_SESSION["menu"] = 7;
 <?php     
     $keySearch = "";   
     $dateShow = "";
-    $optionValue = "0"; 
+    $optionValue = "0";     
     if(isset($_POST['submit'])){     
         $optionValue = $_POST['typeOption'];           
         
@@ -21,7 +21,10 @@ $_SESSION["menu"] = 7;
         }
         
 
-    }    
+    } elseif (isset($_GET['fname'])) {
+        $optionValue = "0" ;   
+        $keySearch = htmlspecialchars($_GET['fname']);
+    }   
 
  ?>
 
