@@ -121,7 +121,7 @@ $_SESSION["menu"] = 3;
                             <div class="col-lg-12">
                                 <div class="overview-wrap h-100 bg-light text-dark">
                                     <?php
-                                    $roomlist = DB::query("SELECT Room_Number, Room_Rate, Room_Info FROM Room, Price WHERE Room.Room_Type = Price.Room_Type ");
+                                    $roomlist = DB::query("SELECT Room_Number, Room_Rate, Room_Info FROM Room, Price WHERE Room.Room_Type = Price.Room_Type ORDER BY Room.Room_Number ASC");
                                     ?>
 
 
