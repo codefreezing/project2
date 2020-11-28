@@ -123,7 +123,7 @@ include "menu.php";
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+1 day')); ?>" class="btn btn-secondary btntext">
+                                                 <a href="create_reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+1 day')); ?>" class="btn btn-secondary btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -154,7 +154,7 @@ include "menu.php";
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+2 day')); ?>" class="btn btn-success btntext">
+                                                 <a href="create_reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+2 day')); ?>" class="btn btn-success btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -185,7 +185,7 @@ include "menu.php";
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+3 day')); ?>" class="btn btn-danger btntext">
+                                                 <a href="create_reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+3 day')); ?>" class="btn btn-danger btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -216,7 +216,7 @@ include "menu.php";
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+4 day')); ?>" class="btn btn-warning btntext">
+                                                 <a href="create_reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+4 day')); ?>" class="btn btn-warning btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -247,7 +247,7 @@ include "menu.php";
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+5 day')); ?>" class="btn btn-info btntext">
+                                                 <a href="create_reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+5 day')); ?>" class="btn btn-info btntext">
                                                 <?php
                                                 }
                                                 ?>
@@ -278,7 +278,7 @@ include "menu.php";
 
                                                 }else{
                                                 ?>
-                                                 <a href="reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+6 day')); ?>" class="btn btn-dark btntext">
+                                                 <a href="create_reservation.php?roomid=<?php echo $row['Room_Number']; ?>&datecheck=<?php echo date("Y-m-d", strtotime('+6 day')); ?>" class="btn btn-dark btntext">
                                                 <?php
                                                 }
                                                 ?>
