@@ -248,7 +248,7 @@ $_SESSION["menu"] = 3;
                                                     <div class="btn-group btn-block">
 
                                                         <button class="btn btn-lg btn-success mr-2 text-light rounded" id="submitEdit" name="submitEdit" type="submit">Update</button>
-                                                        <a href="current_stay.php?bookingid=<?php echo $bookingid; ?>Fname=<?php echo $fname; ?>&Lname=<?php echo $lname; ?>&Date_Made=<?php echo $date_made; ?>&Check_In_Date=<?php echo $date_checkin; ?>&Check_Out_Date=<?php echo $date_checkout; ?>&Room_Info=<?php echo $room_type; ?>&Room_Number=<?php echo $room_number; ?>&Web_Made=<?php echo $web_made; ?>&Room_Rate=<?php echo $rate; ?>&Total_Charge=<?php echo $total_charge; ?>" class="btn btn-lg btn-success ml-2 text-light rounded">Check In</a>
+                                                        <a href="current_stay.php?bookingid=<?php echo $bookingid; ?>&Fname=<?php echo $fname; ?>&Lname=<?php echo $lname; ?>&Date_Made=<?php echo $date_made; ?>&Check_In_Date=<?php echo $date_checkin; ?>&Check_Out_Date=<?php echo $date_checkout; ?>&Room_Info=<?php echo $room_type; ?>&Room_Number=<?php echo $room_number; ?>&Web_Made=<?php echo $web_made; ?>&Room_Rate=<?php echo $rate; ?>&Total_Charge=<?php echo $total_charge; ?>" class="btn btn-lg btn-success ml-2 text-light rounded">Check In</a>
                                                     </div>
                                                 </div>
                                             </div>
