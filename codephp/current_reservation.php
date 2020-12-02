@@ -40,7 +40,14 @@ $_SESSION["menu"] = 3;
             $bookingid = isset($_GET["BookingID"]) ? $_GET["BookingID"] : '';
             $guestid = isset($_GET["GuestID"]) ? $_GET["GuestID"] : '';
 
+            $mdate_out = new DateTime($date_checkout);
+            $mdate_in = new DateTime($date_checkin);
+
+            $interval = $mdate_out->diff($mdate_in);
+            $diff = $interval->days;
+
             $result = '';
+
 
             if (isset($_POST["submitEdit"])) {
                 $fname = isset($_POST["fname"]) ? $_POST["fname"] : '';
@@ -151,17 +158,17 @@ $_SESSION["menu"] = 3;
                                             </div>
                                             <div class="form-group row">
                                                 <label for="date-checkin">Date Checkin</label>
-                                                <input required class="form-control" type="date" name="date-checkin" id="date-checkin" onchange="checkDateIn(this.value)" placeholder="MM/DD/YYYY" value="<?php echo $date_checkin ?>">
+                                                <input required class="form-control" type="date" name="date-checkin" id="date-checkin" onchange="checkDateIn(this.value); updateChargeOnCheckIn(this)" placeholder="MM/DD/YYYY" value="<?php echo $date_checkin ?>">
                                             </div>
                                             <div class="form-group row">
                                                 <label for="date-checkout">Date Checkout</label>
-                                                <input required class="form-control" type="date" name="date-checkout" id="date-checkout" onchange="checkDateOut(this.value)" placeholder="MM/DD/YYYY" value="<?php echo $date_checkout ?>">
+                                                <input required class="form-control" type="date" name="date-checkout" id="date-checkout" onchange="checkDateOut(this.value); updateChargeOnCheckOut(this)" placeholder="MM/DD/YYYY" value="<?php echo $date_checkout ?>">
                                             </div>
 
                                             <div class=" form-group row">
                                                 <label for="room-number">Room Number</label>
                                                 <?php
-                                                echo "<select class=\"form-control\" name=\"room-number\" id=\"room-number\" onchange=\"update(this)\">";
+                                                echo "<select class=\"form-control\" name=\"room-number\" id=\"room-number\" onchange=\"updateChargeOnRoom(this)\">";
 
                                                 if (!empty($room_number)) {
                                                     echo "<option value='" . $room_number . "' selected='selected'>" . $room_number . "</option>";
@@ -179,23 +186,16 @@ $_SESSION["menu"] = 3;
                                             <div class="form-group row">
                                                 <label for="room-type">Room Type</label>
                                                 <?php
-                                                echo "<select class=\"form-control\" name=\"room-type\" id=\"room-type\" readonly>";
 
                                                 if (!empty($room_number)) {
                                                     $query_type = DB::query("SELECT Room_Info FROM Room, Price WHERE Room.Room_Type = Price.Room_Type AND Room_Number={$room_number}");
                                                     foreach ($query_type as $type) {
-
-                                                        echo "<option selected value='" . $type['Room_Info'] . "'>" . $type['Room_Info'] . "</option>";
+                                                        echo "<input required readonly class=\"form-control\" name=\"room-type\" id=\"room-type\" value='" . $type['Room_Info'] . "'>";
                                                     }
                                                 }
 
                                                 ?>
-                                                <option disabled>--------</option>
-                                                <option>King (K)</option>
-                                                <option>Double Queen (DQ)</option>
-                                                <option>Double Queen with Kitchen (DQK)</option>
-                                                <option>Suite (S)</option>
-                                                </select>
+
                                             </div>
 
 
@@ -212,26 +212,19 @@ $_SESSION["menu"] = 3;
                                             <div class="form-group row">
                                                 <label for="rate">Daily Rate ($/Day)</label>
                                                 <div class="input-group">
+                                                    <span class="input-group-addon">$</span>
 
-                                                    <!-- <select class="form-control currency" name="room-rate" id="room-rate"> -->
                                                     <?php
-                                                    echo "<select class=\"form-control\" currency name=\"room-rate\" id=\"room-rate\" readonly>";
-
 
                                                     if (!empty($room_number)) {
                                                         $query_rate = DB::query("SELECT Room_Rate FROM Room, Price WHERE Room.Room_Type = Price.Room_Type AND Room_Number = {$room_number}");
                                                         foreach ($query_rate as $type) {
-                                                            echo "<option selected value='" . $type['Room_Rate'] . "'>" . $type['Room_Rate'] . "</option>";
+                                                            echo "<input required readonly class=\"form-control\" name=\"room-rate\" id=\"room-rate\" value='" . $type['Room_Rate'] .  "'>";
                                                         }
                                                     }
                                                     ?>
-                                                    <option disabled>--------</option>
-                                                    <option value="200">$200</option>
-                                                    <option value="400">$400</option>
-                                                    <option value="600">$600</option>
-                                                    <option value="800">$800</option>
 
-                                                    </select>
+
                                                 </div>
                                             </div>
 
@@ -239,8 +232,15 @@ $_SESSION["menu"] = 3;
                                                 <label for="total-charge">Total Charge ($)</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">$</span>
-                                                    <input type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="total-charge" name="total-charge" value="<?php echo $total_charge ?>" />
-                                                </div>
+                                                    <?php
+
+                                                    if (!empty($room_number)) {
+                                                        $query_rate = DB::query("SELECT Room_Rate FROM Room, Price WHERE Room.Room_Type = Price.Room_Type AND Room_Number = {$room_number}");
+                                                        foreach ($query_rate as $type) {
+                                                            echo "<input required readonly class=\"form-control\" name=\"total-charge\" id=\"total-charge\" value='" . ($type['Room_Rate']  * $diff) .  "'>";
+                                                        }
+                                                    }
+                                                    ?> </div>
                                             </div>
 
                                             <div class="row pt-3 justify-content-center align-self-center">
@@ -267,7 +267,6 @@ $_SESSION["menu"] = 3;
 
 
                                     <!-- abc1 -->
-
                                 </div>
 
                                 <div class="row">
@@ -291,11 +290,39 @@ $_SESSION["menu"] = 3;
 
 </body>
 <script>
-    // $("#submitEdit").click(function() {
-    //     $("#buttonAlert").addClass('show') //Shows Bootstrap alert
-    // })
+    function updateChargeOnCheckIn(elem) {
+        var room_number = $("#room-number").val();
+        var fname = $("#fnameInput").val();
+        var lname = $("#lnameInput").val();
+        var date_made = $("#date-made").val();
+        var date_in = elem.value;
+        var date_out = $("#date-checkout").val();
+        var room_type = $("#room-type").val();
+        var web_made = $("#web-made").val();
 
-    function update(elem) {
+        location.href = "current_reservation.php?BookingID=<?php echo $bookingid ?>" +
+            "&GuestID=<?php echo $guestid ?>" + "&Room_Number=" + room_number + "&Date_Made=" + date_made +
+            "&Check_Out_Date=" + date_out + "&Check_In_Date=" + date_in + "&Fname=" + fname + "&Lname=" + lname +
+            "&Room_Info=" + room_type + "&Web_Made=" + web_made;
+    }
+
+    function updateChargeOnCheckOut(elem) {
+        var room_number = $("#room-number").val();
+        var fname = $("#fnameInput").val();
+        var lname = $("#lnameInput").val();
+        var date_made = $("#date-made").val();
+        var date_in = $("#date-checkin").val();
+        var date_out = elem.value;
+        var room_type = $("#room-type").val();
+        var web_made = $("#web-made").val();
+
+        location.href = "current_reservation.php?BookingID=<?php echo $bookingid ?>" +
+            "&GuestID=<?php echo $guestid ?>" + "&Room_Number=" + room_number + "&Date_Made=" + date_made +
+            "&Check_Out_Date=" + date_out + "&Check_In_Date=" + date_in + "&Fname=" + fname + "&Lname=" + lname +
+            "&Room_Info=" + room_type + "&Web_Made=" + web_made;
+    }
+
+    function updateChargeOnRoom(elem) {
         var room_number = elem.value;
         var fname = $("#fnameInput").val();
         var lname = $("#lnameInput").val();
@@ -304,13 +331,11 @@ $_SESSION["menu"] = 3;
         var date_out = $("#date-checkout").val();
         var room_type = $("#room-type").val();
         var web_made = $("#web-made").val();
-        var rate = $("#room-rate").val();
-        var total_charge = "";
 
         location.href = "current_reservation.php?BookingID=<?php echo $bookingid ?>" +
             "&GuestID=<?php echo $guestid ?>" + "&Room_Number=" + room_number + "&Date_Made=" + date_made +
             "&Check_Out_Date=" + date_out + "&Check_In_Date=" + date_in + "&Fname=" + fname + "&Lname=" + lname +
-            "&Room_Info=" + room_type + "&Web_Made=" + web_made + "&Room_Rate=" + rate + "&Total_Charge=" + total_charge;
+            "&Room_Info=" + room_type + "&Web_Made=" + web_made;
     }
 
     function checkDateMade(date_made) {
@@ -321,6 +346,7 @@ $_SESSION["menu"] = 3;
             alert("Date Made can't be a past date.")
             document.getElementById("date-made").value = current_date;
         }
+
     }
 
     function convertDate(date) {
@@ -338,8 +364,14 @@ $_SESSION["menu"] = 3;
         var date_made = document.getElementById("date-made").value;
         var date_out = document.getElementById("date-checkout").value;
 
+
         if (date_in < date_made) {
             alert("Date Made can't be later than Checkin Date.");
+            document.getElementById("date-checkin").value = document.getElementById("date-made").value;
+            document.getElementById("date-checkin").stepUp(1);
+        }
+        if (date_in > date_out) {
+            alert("Checkin Date can't be later than Checkout Date.");
             document.getElementById("date-checkin").value = document.getElementById("date-made").value;
             document.getElementById("date-checkin").stepUp(1);
         }
@@ -353,7 +385,6 @@ $_SESSION["menu"] = 3;
             document.getElementById("date-checkout").value = document.getElementById("date-checkin").value;
             document.getElementById("date-checkout").stepUp(1);
         }
-
     }
 </script>
 

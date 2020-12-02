@@ -12,7 +12,6 @@ $_SESSION["menu"] = 3;
     include "db.class.php";
     include "debug.php";
     include "head.php";
-
     ?>
 
 </head>
@@ -20,6 +19,7 @@ $_SESSION["menu"] = 3;
 
 <body class="animsition">
     <div class="page-wrapper">
+
 
 
         <!-- MENU SIDEBAR-->
@@ -31,7 +31,6 @@ $_SESSION["menu"] = 3;
         <!-- PAGE CONTAINER-->
         <div class="page-container">
             <?php
-
             $result = '';
 
             if (!empty($_POST) && isset($_POST["submit"])) {
@@ -51,7 +50,6 @@ $_SESSION["menu"] = 3;
                     'Fname' => $fname,
                     'Lname' => $lname,
                 ]);
-                debug($input_name);
 
                 $booking_id = DB::query("SELECT BookingID FROM Booking ORDER BY BookingID DESC LIMIT 1");
                 $input_booking = DB::query("INSERT INTO Booking(Guest_ID, Website_Reservation, Date_Made) VALUES ( (SELECT Guest_ID FROM Guest ORDER BY Guest_ID DESC LIMIT 1), %s, %s)", $web_made, $date_made);
@@ -63,18 +61,14 @@ $_SESSION["menu"] = 3;
                 if (!$check_dups) {
                     $mdate_out = new DateTime($date_checkout);
                     $mdate_in = new DateTime($date_checkin);
-                    debug($mdate_in);
+                    //debug($mdate_in);
                     $interval = $mdate_out->diff($mdate_in);
-                    debug($interval->days);
 
                     $diff = $interval->days;
-                    debug($diff);
                     $input_record = DB::query("INSERT INTO Record(Room_Number, Date, BookingID, Record_Status_Code) VALUES (%s, %s, (SELECT BookingID FROM Booking ORDER BY BookingID DESC LIMIT 1), 0)", $room_number, $date_checkin);
 
-                    debug($date_checkin);
                     for ($i = 1; $i < $diff; $i++) {
                         $mdate_in = date('Y-m-d', strtotime($date_checkin . ' + ' . $i . 'days'));
-                        debug($mdate_in);
 
                         $input_record = DB::query("INSERT INTO Record(Room_Number, Date, BookingID, Record_Status_Code) VALUES (%s, %s, (SELECT BookingID FROM Booking ORDER BY BookingID DESC LIMIT 1), 0)", $room_number, $mdate_in);
                     }
@@ -82,7 +76,7 @@ $_SESSION["menu"] = 3;
                     if ($input_record) {
 
                         $result = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Success!</strong> The reservation has been updated.
+                    <strong>Success!</strong> The reservation has been created.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -107,7 +101,6 @@ $_SESSION["menu"] = 3;
                 }
             }
 
-            debug($result);
 
             $room_number = isset($_GET["room_number"]) ? $_GET["room_number"] : '';
             $current_web_made = isset($_GET["web_made"]) ? $_GET["web_made"] : '';
@@ -117,6 +110,12 @@ $_SESSION["menu"] = 3;
             $current_date_in = isset($_GET["date_in"]) ? $_GET["date_in"] : '';
             $current_date_out = isset($_GET["date_out"]) ? $_GET["date_out"] : '';
 
+            $mdate_out = new DateTime($current_date_out);
+            $mdate_in = new DateTime($current_date_in);
+
+            $interval = $mdate_out->diff($mdate_in);
+            $diff = $interval->days;
+            debug($diff);
 
             ?>
             <!-- HEADER DESKTOP-->
@@ -196,23 +195,18 @@ $_SESSION["menu"] = 3;
                                             <div class="form-group row">
                                                 <label for="room-type">Room Type</label>
                                                 <?php
-                                                echo "<select required class=\"form-control\" name=\"room-type\" id=\"room-type\" readonly>";
 
                                                 if (!empty($room_number)) {
-                                                    $query_type = DB::query("SELECT Room_Info FROM Room, Price WHERE Room.Room_Type = Price.Room_Type AND Room_Number = {$room_number}");
+                                                    $query_type = DB::query("SELECT Room_Info FROM Room, Price WHERE Room.Room_Type = Price.Room_Type AND Room_Number={$room_number}");
                                                     foreach ($query_type as $type) {
-
-                                                        echo "<option selected value='" . $type['Room_Info'] . "'>" . $type['Room_Info'] . "</option>";
+                                                        echo "<input required readonly class=\"form-control\" name=\"room-type\" id=\"room-type\" value='" . $type['Room_Info'] . "'>";
                                                     }
+                                                } else {
+                                                    echo "<input required readonly class=\"form-control\" name=\"room-type\" id=\"room-type\" value=\"\">";
                                                 }
 
                                                 ?>
-                                                <option disabled>--------</option>
-                                                <option>King (K)</option>
-                                                <option>Double Queen (DQ)</option>
-                                                <option>Double Queen with Kitchen (DQK)</option>
-                                                <option>Suite (S)</option>
-                                                </select>
+
                                             </div>
 
                                             <div class="form-group row">
@@ -233,25 +227,23 @@ $_SESSION["menu"] = 3;
 
                                             <div class="form-group row">
                                                 <label for="rate">Daily Rate ($/Day)</label>
-                                                <div class="input-group mb-3">
+                                                <div class="input-group">
 
                                                     <!-- <select class="form-control currency" name="room-rate" id="room-rate"> -->
-                                                    <?php
-                                                    echo "<select required class=\"form-control\" currency name=\"room-rate\" id=\"room-rate\" readonly>";
+                                                    <span class="input-group-addon">$</span>
 
+                                                    <?php
 
                                                     if (!empty($room_number)) {
                                                         $query_rate = DB::query("SELECT Room_Rate FROM Room, Price WHERE Room.Room_Type = Price.Room_Type AND Room_Number = {$room_number}");
                                                         foreach ($query_rate as $type) {
-                                                            echo "<option selected value='" . $type['Room_Rate'] . "'>" . $type['Room_Rate'] . "</option>";
+                                                            echo "<input required readonly class=\"form-control\" name=\"room-rate\" id=\"room-rate\" value='" . $type['Room_Rate'] .  "'>";
                                                         }
+                                                    } else {
+                                                        echo "<input required readonly class=\"form-control\" name=\"room-rate\" id=\"room-rate\" value=\"\">";
                                                     }
                                                     ?>
-                                                    <option disabled>--------</option>
-                                                    <option value="200">$200</option>
-                                                    <option value="400">$400</option>
-                                                    <option value="600">$600</option>
-                                                    <option value="800">$800</option>
+
 
                                                     </select>
                                                 </div>
@@ -261,9 +253,20 @@ $_SESSION["menu"] = 3;
                                                 <label for="total-charge">Total Charge ($)</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">$</span>
-                                                    <input type="number" value="" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="total-charge" name="total-charge" />
+                                                    <?php
+
+                                                    if (!empty($room_number)) {
+                                                        $query_rate = DB::query("SELECT Room_Rate FROM Room, Price WHERE Room.Room_Type = Price.Room_Type AND Room_Number = {$room_number}");
+                                                        foreach ($query_rate as $type) {
+                                                            echo "<input required readonly class=\"form-control\" name=\"total-charge\" id=\"total-charge\" value='" . ($type['Room_Rate']  * $diff) .  "'>";
+                                                        }
+                                                    } else {
+                                                        echo "<input required readonly class=\"form-control\" name=\"total-charge\" id=\"total-charge\" value=\"\">";
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
+
 
 
                                             <div class="row pt-3 justify-content-center align-self-center">
@@ -278,10 +281,7 @@ $_SESSION["menu"] = 3;
 
 
                                         </form>
-                                    </div>
-
-
-                                    <!-- copyright section -->
+                                    </div> <!-- copyright section -->
 
                                 </div>
                                 <div class="row">
@@ -321,12 +321,20 @@ $_SESSION["menu"] = 3;
 
 
     function checkDateMade(date_made) {
+        var date_in = document.getElementById("date-checkin").value;
+        var date_out = document.getElementById("date-checkout").value;
+
         var today = new Date();
         current_date = convertDate(today);
 
         if (date_made < current_date) {
             alert("Date Made can't be a past date.")
             document.getElementById("date-made").value = current_date;
+        }
+
+        if (date_in !== '' && date_made > date_in) {
+            alert("Date Made can't be later than Checkin Date.")
+            document.getElementById("date-made").value = document.getElementById("date-checkin").value
         }
     }
 
@@ -345,7 +353,16 @@ $_SESSION["menu"] = 3;
         var date_made = document.getElementById("date-made").value;
         var date_out = document.getElementById("date-checkout").value;
 
-        if (date_in < date_made) {
+        var today = new Date();
+        current_date = convertDate(today);
+
+        if (date_made === '' && date_in < current_date) {
+            alert("Checkin Date can't be in the past.");
+            document.getElementById("date-checkin").value = current_date;
+        }
+
+
+        if (date_in !== '0' && date_in < date_made) {
             alert("Date Made can't be later than Checkin Date.");
             document.getElementById("date-checkin").value = document.getElementById("date-made").value;
             document.getElementById("date-checkin").stepUp(1);
@@ -354,6 +371,16 @@ $_SESSION["menu"] = 3;
 
     function checkDateOut(date_out) {
         var date_in = document.getElementById("date-checkin").value;
+        var date_out = document.getElementById("date-checkout").value;
+
+        var today = new Date();
+        current_date = convertDate(today);
+
+        if (date_out < current_date) {
+            alert("Checkout Date can't be in the past.");
+            document.getElementById("date-checkout").value = current_date;
+            document.getElementById("date-checkout").stepUp(1);
+        }
 
         if (date_out <= date_in) {
             alert("Checkin Date can't be later than or equal to Checkout Date.");
