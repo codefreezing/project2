@@ -20,8 +20,6 @@ $_SESSION["menu"] = 3;
 <body class="animsition">
     <div class="page-wrapper">
 
-
-
         <!-- MENU SIDEBAR-->
         <?php
         include "menu.php";
@@ -115,7 +113,7 @@ $_SESSION["menu"] = 3;
 
             $interval = $mdate_out->diff($mdate_in);
             $diff = $interval->days;
-            debug($diff);
+            //debug($diff);
 
             ?>
             <!-- HEADER DESKTOP-->
