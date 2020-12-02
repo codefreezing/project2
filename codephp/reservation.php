@@ -34,7 +34,7 @@ $_SESSION["menu"] = 3;
 
                 $delete_query1 = DB::query("DELETE FROM Record WHERE BookingID = {$id}");
                 $delete_query2 = DB::query("DELETE FROM Booking WHERE BookingID = {$id}");
-                debug($delete_query);
+                //debug($delete_query);
 
                 if ($delete_query1 && $delete_query2) {
 
