@@ -56,30 +56,54 @@ include "menu.php";
                                     <th>Balance</th>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $currentStay = DB::query("SELECT Guest.Guest_ID AS Guest_ID, Fname, Lname, Invoice.Date_Checked_In AS Date_Checked_In, Invoice.Date_Checkout AS Date_Checkout, Price.Room_Info AS Room_Info, Room.Room_Number AS Room_Number, Price.Room_Rate AS Room_Rate, Invoice.Total_Charge AS Total_Charge, Invoice.Payment_Made AS Payment_Made
-                                    FROM Guest 
-                                    INNER JOIN Invoice ON Guest.Guest_ID = Invoice.Guest_ID
-                                    INNER JOIN Invoice_Rooms ON Invoice.Invoice_ID = Invoice_Rooms.Invoice_ID
-                                    INNER JOIN Room ON Invoice_Rooms.Room_Number = Room.Room_Number
-                                    INNER JOIN Price ON Room.Room_Type = Price.Room_Type;");
-                                    foreach ($currentStay as $row) {
-                                        $balance = $row['Total_Charge'] - $row['Payment_Made'];
-                                    ?>
                                     <tr>
-                                        <td><?php echo $row["Lname"];?></td>
-                                        <td><?php echo $row['Fname'];?></td>
-                                        <td><?php echo $row['Date_Checked_In'];?></td>
-                                        <td><?php echo $row['Date_Checkout'];?></td>
-                                        <td><?php echo $row['Room_Info'];?></td>
-                                        <td><?php echo $row['Room_Number']?></td>
-                                        <td><?php echo '$'.$row['Room_Rate']?></td>
-                                        <td><?php echo '$'.$row['Total_Charge'];?></td>
-                                        <td><?php echo '$'.$row["Payment_Made"];?></td>
-                                        <td><?php echo '$'.$balance;?></td>
-                                    <?php
-                                    }
-                                    ?>
+                                        <td>Doe</td>>
+                                        <td>John</td>
+                                        <td>10/28/2020 12:00 PM</td>
+                                        <td>11/01/2020 11:00 AM</td>
+                                        <td>Single Queen</td>
+                                        <td>504</td>
+                                        <td>$127</td>
+                                        <td>$508</td>
+                                        <td>Paid</td>
+                                        <td>$0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gibson</td>>
+                                        <td>John</td>
+                                        <td>11/01/2020 12:00 PM</td>
+                                        <td>11/10/2020 11:00 AM</td>
+                                        <td>Single King</td>
+                                        <td>511</td>
+                                        <td>$224</td>
+                                        <td>$2240</td>
+                                        <td>Partial</td>
+                                        <td>$2000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Strife</td>>
+                                        <td>Cloud</td>
+                                        <td>11/01/2020 12:00 PM</td>
+                                        <td>11/7/2020 11:00 AM</td>
+                                        <td>Double Queen</td>
+                                        <td>511</td>
+                                        <td>$187</td>
+                                        <td>$109</td>
+                                        <td>Not Paid</td>
+                                        <td>$1309</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mack</td>>
+                                        <td>Carolyn</td>
+                                        <td>11/13/2020 12:00 PM</td>
+                                        <td>11/24/2020 11:00 AM</td>
+                                        <td>Luxury Suite</td>
+                                        <td>607</td>
+                                        <td>$512</td>
+                                        <td>$4608</td>
+                                        <td>Paid</td>
+                                        <td>$0</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
