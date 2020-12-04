@@ -152,7 +152,7 @@ foreach ($guestList as $row):
                                         </div>
                                         <div class = "col-6 text-light">
                                         <blockquote>
-                                            <h4 class="text-light"><a href="./guest_information.php?guestid=<?php echo htmlspecialchars($row['Guest_ID']); ?>" class="btn btn-primary px-0"><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></a></h4>
+                                            <h4 class="text-light"><a href="./edit_guest_info.php?guestid=<?php echo htmlspecialchars($row['Guest_ID']); ?>" class="btn btn-primary px-0"><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></a></h4>
                                             <small><cite title="Source Title"><?php echo htmlspecialchars($row['Address']); ?><i class="icon-map-marker"></i></cite></small>
                                         </blockquote>
                                         <p>
