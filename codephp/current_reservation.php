@@ -154,7 +154,7 @@ $_SESSION["menu"] = 3;
                                             </div>
                                             <div class="form-group row">
                                                 <label for="date-made">Date Made</label>
-                                                <input required class="form-control" type="date" name="date-made" id="date-made" onchange="checkDateMade(this.value)" placeholder="MM/DD/YYYY" value="<?php echo $date_made ?>">
+                                                <input required readonly class="form-control" type="date" name="date-made" id="date-made" onchange="checkDateMade(this.value)" placeholder="MM/DD/YYYY" value="<?php echo $date_made ?>">
                                             </div>
                                             <div class="form-group row">
                                                 <label for="date-checkin">Date Checkin</label>
@@ -338,27 +338,27 @@ $_SESSION["menu"] = 3;
             "&Room_Info=" + room_type + "&Web_Made=" + web_made;
     }
 
-    function checkDateMade(date_made) {
-        var today = new Date();
-        current_date = convertDate(today);
+    // function checkDateMade(date_made) {
+    //     var today = new Date();
+    //     current_date = convertDate(today);
 
-        if (date_made < current_date) {
-            alert("Date Made can't be a past date.")
-            document.getElementById("date-made").value = current_date;
-        }
+    //     if (date_made < current_date) {
+    //         alert("Date Made can't be a past date.")
+    //         document.getElementById("date-made").value = current_date;
+    //     }
 
-    }
+    // }
 
-    function convertDate(date) {
-        var yyyy = date.getFullYear().toString();
-        var mm = (date.getMonth() + 1).toString();
-        var dd = date.getDate().toString();
+    // function convertDate(date) {
+    //     var yyyy = date.getFullYear().toString();
+    //     var mm = (date.getMonth() + 1).toString();
+    //     var dd = date.getDate().toString();
 
-        var mmChars = mm.split('');
-        var ddChars = dd.split('');
+    //     var mmChars = mm.split('');
+    //     var ddChars = dd.split('');
 
-        return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
-    }
+    //     return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+    // }
 
     function checkDateIn(date_in) {
         var date_made = document.getElementById("date-made").value;

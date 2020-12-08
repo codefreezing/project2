@@ -159,7 +159,7 @@ $_SESSION["menu"] = 3;
                                             </div>
                                             <div class="form-group row">
                                                 <label for="date-made">Date Made</label>
-                                                <input required class="form-control" type="date" name="date-made" id="date-made" onchange="checkDateMade(this.value)" placeholder=" MM/DD/YYYY" value="<?php echo (!empty($current_date_made)) ? $current_date_made : '' ?>">
+                                                <input required readonly class="form-control" type="date" name="date-made" id="date-made" value="<?php echo date("Y-m-d"); ?>">
                                             </div>
                                             <div class="form-group row">
                                                 <label for="date-checkin">Date Checkin</label>
@@ -317,25 +317,6 @@ $_SESSION["menu"] = 3;
             "&lname=" + lname + "&date_made=" + date_made + "&date_in=" + date_in + "&date_out=" + date_out;
     }
 
-
-    function checkDateMade(date_made) {
-        var date_in = document.getElementById("date-checkin").value;
-        var date_out = document.getElementById("date-checkout").value;
-
-        var today = new Date();
-        current_date = convertDate(today);
-
-        if (date_made < current_date) {
-            alert("Date Made can't be a past date.")
-            document.getElementById("date-made").value = current_date;
-        }
-
-        if (date_in !== '' && date_made > date_in) {
-            alert("Date Made can't be later than Checkin Date.")
-            document.getElementById("date-made").value = document.getElementById("date-checkin").value
-        }
-    }
-
     function convertDate(date) {
         var yyyy = date.getFullYear().toString();
         var mm = (date.getMonth() + 1).toString();
@@ -351,15 +332,6 @@ $_SESSION["menu"] = 3;
         var date_made = document.getElementById("date-made").value;
         var date_out = document.getElementById("date-checkout").value;
 
-        var today = new Date();
-        current_date = convertDate(today);
-
-        if (date_made === '' && date_in < current_date) {
-            alert("Checkin Date can't be in the past.");
-            document.getElementById("date-checkin").value = current_date;
-        }
-
-
         if (date_in !== '0' && date_in < date_made) {
             alert("Date Made can't be later than Checkin Date.");
             document.getElementById("date-checkin").value = document.getElementById("date-made").value;
@@ -370,15 +342,6 @@ $_SESSION["menu"] = 3;
     function checkDateOut(date_out) {
         var date_in = document.getElementById("date-checkin").value;
         var date_out = document.getElementById("date-checkout").value;
-
-        var today = new Date();
-        current_date = convertDate(today);
-
-        if (date_out < current_date) {
-            alert("Checkout Date can't be in the past.");
-            document.getElementById("date-checkout").value = current_date;
-            document.getElementById("date-checkout").stepUp(1);
-        }
 
         if (date_out <= date_in) {
             alert("Checkin Date can't be later than or equal to Checkout Date.");
