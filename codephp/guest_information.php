@@ -43,25 +43,26 @@ include "menu.php";
                     <div class="container-fluid">
                         <div class="table-responsive table--no-card m-b-30">
                             <table class="table table-borderless table-striped table-earning">
-                                <thead>
-                                    <th>Guest ID</th>
-                                    <th>Photo</th>
-                                    <th>Last Name</th>
-                                    <th>First Name</th>
-                                    <th>Phone Number</th>
-                                    <th>Address</th>
-                                    <th>E-mail</th>
-                                    <th>ID Info</th>
-                                    <th>Vehicle</th>
-                                    <th>License Plate</th>
-                                </thead>
                                 <tbody>
+                                    <thead>
+                                        <th>Guest ID</th>
+                                        <th>Photo</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Phone Number</th>
+                                        <th>Address</th>
+                                        <th>E-mail</th>
+                                        <th>ID Info</th>
+                                        <th>Vehicle</th>
+                                        <th>License Plate</th>
+                                    </thead>
                                     <?php
                                     $guest_info = DB::query("SELECT * FROM Guest");
 
                                     foreach ($guest_info as $row) {
                                     ?>
-                                    <tr>
+                                    </form method="Post">
+                                    <tr class="clickable-row" id="row" style="cursor: pointer;" onclick="location.href='edit_guest_info.php?guestid=<?php echo $row['Guest_ID']?>&Lname=<?php echo $row['Lname']?>&Fname=<?php echo $row['Fname']?>&Phone=<?php echo $row['Phone_Number']?>&Address=<?php echo $row['Address']?>&Email=<?php echo $row['Email']?>&ID_Info=<?php echo $row['ID_Info']?>&Vehicle=<?php echo $row['Vehicle']?>&License_Plate=<?php echo $row['License_Plate']?>'">
                                         <td><?php echo $row['Guest_ID']?></td>
                                         <td><img src="<?php echo $row['Photo']?>"></td>
                                         <td><?php echo $row['Lname']?></td>
@@ -72,6 +73,8 @@ include "menu.php";
                                         <td><?php echo $row['ID_Info']?></td>
                                         <td><?php echo $row['Vehicle']?></td>
                                         <td><?php echo $row['License_Plate']?></td>
+                                    </tr>
+                                    </form>
                                     <?php
                                     }
                                     ?>
