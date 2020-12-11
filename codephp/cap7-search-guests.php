@@ -21,10 +21,11 @@ $_SESSION["menu"] = 7;
         }
         
 
-    } elseif (isset($_GET['fname'])) {
-        $optionValue = "0" ;   
-        $keySearch = htmlspecialchars($_GET['fname']);
-    }   
+    } 
+    // elseif (isset($_GET['fname'])) {
+    //     $optionValue = "0" ;   
+    //     $keySearch = htmlspecialchars($_GET['fname']);
+    // }   
 
  ?>
 
@@ -152,7 +153,7 @@ foreach ($guestList as $row):
                                         </div>
                                         <div class = "col-6 text-light">
                                         <blockquote>
-                                            <h4 class="text-light"><a href="./edit_guest_info.php?guestid=<?php echo htmlspecialchars($row['Guest_ID']); ?>" class="btn btn-primary px-0"><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></a></h4>
+                                            <h4 class="text-light"><a href="./edit_guest_info.php?guestid=<?php echo htmlspecialchars($row['Guest_ID']); ?>" class="btn btn-primary px-0" target="_blank"><?php echo htmlspecialchars($row['Fname']).' '.htmlspecialchars($row['Lname']); ?></a></h4>
                                             <small><cite title="Source Title"><?php echo htmlspecialchars($row['Address']); ?><i class="icon-map-marker"></i></cite></small>
                                         </blockquote>
                                         <p>
